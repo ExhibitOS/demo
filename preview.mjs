@@ -4,14 +4,40 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { verifyOutput } from './verify-output.mjs';
 
-const { DEMO_PREVIEW_WORKER, DEMO_PREVIEW_NAME, CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN } = process.env;
-const label = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
-if (!label.test(DEMO_PREVIEW_WORKER ?? '') || !DEMO_PREVIEW_WORKER.endsWith('-preview') ||
-    !label.test(DEMO_PREVIEW_NAME ?? '') ||
-    ['main', 'production', 'live'].includes(DEMO_PREVIEW_NAME) ||
+const {
+  DEMO_PREVIEW_WORKER, DEMO_PREVIEW_NAME, DEMO_PREVIEW_WORKER_ID,
+  CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN,
+} = process.env;
+const workerId = /^(?:[a-f0-9]{32}|[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})$/;
+if (DEMO_PREVIEW_NAME !== 'verify-ba66d909' ||
+    DEMO_PREVIEW_WORKER !== `exhibitos-${DEMO_PREVIEW_NAME}-preview` ||
+    !workerId.test(DEMO_PREVIEW_WORKER_ID ?? '') ||
     !/^[a-f0-9]{32}$/.test(CLOUDFLARE_ACCOUNT_ID ?? '') || !CLOUDFLARE_API_TOKEN) {
-  throw new Error('Set the approved isolated preview Worker, preview name, Cloudflare account and API token');
+  throw new Error('Set the approved nonce preview names, existing Worker ID, Cloudflare account and API token');
 }
+
+async function checkFreshTarget(base, workerName, expectedId, previewName, token) {
+  const get = (path) => fetch(base + path, {
+    headers: { Authorization: `Bearer ${token}` },
+    redirect: 'error',
+    signal: AbortSignal.timeout(10000),
+  });
+
+  const worker = await get('/' + workerName);
+  if (!worker.ok) throw new Error(`Cannot verify existing preview Worker (HTTP ${worker.status})`);
+  const identity = await worker.json();
+  if (identity.success !== true || identity.result?.id !== expectedId || identity.result?.name !== workerName) {
+    throw new Error('Preview Worker identity differs from the approved target');
+  }
+
+  const preview = await get(`/${workerName}/previews/${previewName}`);
+  if (preview.status !== 404) throw new Error(`Fresh Preview absence not confirmed (HTTP ${preview.status})`);
+  const absence = await preview.json();
+  if (absence.success !== false || absence.errors?.length !== 1 || absence.errors[0].code !== 10025) {
+    throw new Error('Cloudflare did not confirm the named Preview is absent');
+  }
+}
+
 if (process.argv.length !== 2) throw new Error('Usage: node preview.mjs');
 
 const root = fileURLToPath(new URL('.', import.meta.url));
@@ -25,6 +51,9 @@ if (process.versions.node !== lock.toolchain.node || installed.version !== lock.
 }
 
 verifyOutput(output, lock);
+const api = 'https://api.cloudflare.com/client/v4';
+await checkFreshTarget(`${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/workers`,
+  DEMO_PREVIEW_WORKER, DEMO_PREVIEW_WORKER_ID, DEMO_PREVIEW_NAME, CLOUDFLARE_API_TOKEN);
 const config = join(tools, 'wrangler.preview.json');
 writeFileSync(config, JSON.stringify({
   name: DEMO_PREVIEW_WORKER,
@@ -37,4 +66,4 @@ execFileSync(process.execPath, [
   join(wrangler, 'bin/wrangler.js'), 'preview', '--config', config,
   '--worker-name', DEMO_PREVIEW_WORKER, '--name', DEMO_PREVIEW_NAME,
   '--ignore-base-config', '--json',
-], { cwd: root, stdio: 'inherit', env: { ...process.env, WRANGLER_SEND_METRICS: 'false' } });
+], { cwd: root, stdio: 'inherit', env: { ...process.env, CLOUDFLARE_API_BASE_URL: api, WRANGLER_SEND_METRICS: 'false' } });

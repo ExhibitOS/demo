@@ -15,6 +15,13 @@ if (preparePreview && existsSync(tools)) throw new Error('Preview tools already 
 const command = (program, args, cwd) =>
   execFileSync(program, args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] }).trim();
 
+if (preparePreview) {
+  const expectedCommit = process.env.DEMO_PREVIEW_SOURCE_COMMIT;
+  if (!/^[a-f0-9]{40}$/.test(expectedCommit ?? '') ||
+      command('git', ['rev-parse', 'HEAD'], root) !== expectedCommit) {
+    throw new Error('Preview build HEAD differs from the approved Demo commit');
+  }
+}
 if (process.versions.node !== lock.toolchain.node || command('npm', ['--version'], root) !== lock.toolchain.npm) {
   throw new Error('Use the Node and npm versions in demo-lock.json');
 }
