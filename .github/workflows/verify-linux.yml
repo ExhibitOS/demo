@@ -1,0 +1,41 @@
+name: Verify the pinned demo on Linux
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
+      NPM_CONFIG_AUDIT: 'false'
+      NPM_CONFIG_FUND: 'false'
+    steps:
+      - name: Check out the dispatched commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Set up the pinned Node version
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: '24.21.0'
+          check-latest: false
+          package-manager-cache: false
+      - name: Verify approved output
+        shell: bash
+        run: |
+          if [[ "$(npm --version)" != '11.19.0' ]]; then
+            npm install --global npm@11.19.0 --ignore-scripts --no-audit --no-fund
+          fi
+          git rev-parse HEAD
+          uname -sm
+          node --version
+          npm --version
+          sha256sum demo-lock.json
+          node build.mjs
+          sha256sum dist-demo/static-publication-index.json dist-demo/static-export-manifest.json dist-demo/THIRD_PARTY_NOTICES.txt
