@@ -10,8 +10,10 @@ const output = join(root, 'dist-demo');
 const tools = join(root, '.preview-tools');
 const args = process.argv.slice(2);
 const preparePreview = args.length === 1 && args[0] === '--prepare-preview';
-if (args.length && !preparePreview) throw new Error('Usage: node build.mjs [--prepare-preview]');
-if (preparePreview && existsSync(tools)) throw new Error('Preview tools already exist; use a fresh checkout');
+const prepareDeploy = args.length === 1 && args[0] === '--prepare-deploy';
+const retainWrangler = preparePreview || prepareDeploy;
+if (args.length && !retainWrangler) throw new Error('Usage: node build.mjs [--prepare-preview | --prepare-deploy]');
+if (retainWrangler && existsSync(tools)) throw new Error('Wrangler tools already exist; use a fresh checkout');
 const command = (program, args, cwd) =>
   execFileSync(program, args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'] }).trim();
 
@@ -42,7 +44,7 @@ try {
   execFileSync('npm', ['run', 'build:reference-demo'], { cwd: source, stdio: 'inherit' });
   const built = join(source, 'dist-demo');
   const count = verifyOutput(built, lock);
-  if (preparePreview) {
+  if (retainWrangler) {
     const installed = JSON.parse(readFileSync(join(source, 'node_modules/wrangler/package.json'), 'utf8'));
     if (installed.version !== lock.toolchain.wrangler) throw new Error('Wrangler version differs from demo-lock.json');
     renameSync(source, tools);
