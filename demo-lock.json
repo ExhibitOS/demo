@@ -7,7 +7,8 @@
   },
   "toolchain": {
     "node": "24.21.0",
-    "npm": "11.19.0"
+    "npm": "11.19.0",
+    "wrangler": "4.147.0"
   },
   "publication": {
     "publicationId": "a3a7434d-1915-4f21-a133-1604746534a5",
