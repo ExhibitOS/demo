@@ -6,7 +6,8 @@ import { verifyOutput } from './verify-output.mjs';
 
 const {
   CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN, DEMO_DEPLOY_WORKER_ID,
-  EXHIBITOS_APPROVED_DEMO_INDEX_SHA256,
+  EXHIBITOS_APPROVED_DEMO_INDEX_SHA256, WORKERS_CI_BRANCH, WORKERS_CI_COMMIT_SHA,
+  WRANGLER_CI_OVERRIDE_NAME,
 } = process.env;
 const workerId = /^(?:[a-f0-9]{32}|[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12})$/;
 if (process.argv.length !== 2 || !/^[a-f0-9]{32}$/.test(CLOUDFLARE_ACCOUNT_ID ?? '') ||
@@ -15,6 +16,28 @@ if (process.argv.length !== 2 || !/^[a-f0-9]{32}$/.test(CLOUDFLARE_ACCOUNT_ID ??
 }
 
 const root = fileURLToPath(new URL('.', import.meta.url));
+const workerName = 'exhibitos-viewer-demo';
+if (WORKERS_CI_BRANCH !== 'main' || !/^[a-f0-9]{40}$/.test(WORKERS_CI_COMMIT_SHA ?? '') ||
+    execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim() !== WORKERS_CI_COMMIT_SHA) {
+  throw new Error('Deployment requires the Workers Builds checkout for Demo main');
+}
+if (WRANGLER_CI_OVERRIDE_NAME !== undefined && WRANGLER_CI_OVERRIDE_NAME !== workerName) {
+  throw new Error('Wrangler Worker override differs from the approved target');
+}
+
+function isCurrentBuild() {
+  const ref = 'refs/heads/main';
+  const result = execFileSync('git', ['ls-remote', '--exit-code', 'https://github.com/ExhibitOS/demo.git', ref],
+    { cwd: root, encoding: 'utf8', timeout: 10000 }).trim();
+  const match = /^([a-f0-9]{40})\trefs\/heads\/main$/.exec(result);
+  if (!match) throw new Error('Cannot verify the current Demo main commit');
+  if (match[1] === WORKERS_CI_COMMIT_SHA) return true;
+  console.log(`Skipping superseded Demo build ${WORKERS_CI_COMMIT_SHA} (main is ${match[1]})`);
+  return false;
+}
+
+if (!isCurrentBuild()) process.exit(0);
+
 const lock = JSON.parse(readFileSync(join(root, 'demo-lock.json'), 'utf8'));
 if (!/^[a-f0-9]{64}$/.test(EXHIBITOS_APPROVED_DEMO_INDEX_SHA256 ?? '') ||
     lock.publication.indexSha256 !== EXHIBITOS_APPROVED_DEMO_INDEX_SHA256) {
@@ -23,6 +46,7 @@ if (!/^[a-f0-9]{64}$/.test(EXHIBITOS_APPROVED_DEMO_INDEX_SHA256 ?? '') ||
 
 const configPath = join(root, 'wrangler.demo.json');
 const config = JSON.parse(readFileSync(configPath, 'utf8'));
+if (config.name !== workerName) throw new Error('Wrangler config differs from the approved Worker name');
 const wrangler = join(root, '.preview-tools/node_modules/wrangler');
 const installed = JSON.parse(readFileSync(join(wrangler, 'package.json'), 'utf8'));
 if (process.versions.node !== lock.toolchain.node || installed.version !== lock.toolchain.wrangler) {
@@ -31,7 +55,7 @@ if (process.versions.node !== lock.toolchain.node || installed.version !== lock.
 
 verifyOutput(join(root, 'dist-demo'), lock);
 const api = 'https://api.cloudflare.com/client/v4';
-const response = await fetch(`${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/workers/${config.name}`, {
+const response = await fetch(`${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/workers/${workerName}`, {
   headers: { Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}` },
   redirect: 'error',
   signal: AbortSignal.timeout(10000),
@@ -39,12 +63,14 @@ const response = await fetch(`${api}/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/w
 if (!response.ok) throw new Error(`Cannot verify deployment Worker (HTTP ${response.status})`);
 const identity = await response.json();
 if (identity.success !== true || identity.result?.id !== DEMO_DEPLOY_WORKER_ID ||
-    identity.result?.name !== config.name) {
+    identity.result?.name !== workerName) {
   throw new Error('Deployment Worker identity differs from the approved target');
 }
+
+if (!isCurrentBuild()) process.exit(0);
 
 execFileSync(process.execPath, [join(wrangler, 'bin/wrangler.js'), 'deploy', '--config', configPath], {
   cwd: root,
   stdio: 'inherit',
-  env: { ...process.env, CLOUDFLARE_API_BASE_URL: api, WRANGLER_SEND_METRICS: 'false' },
+  env: { ...process.env, CLOUDFLARE_API_BASE_URL: api, WRANGLER_CI_OVERRIDE_NAME: workerName, WRANGLER_SEND_METRICS: 'false' },
 });
