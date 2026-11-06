@@ -20,6 +20,23 @@ function inventory(directory, prefix = '') {
   });
 }
 
+function verifyPublication(directory, publication, paths) {
+  const indexPath = join(directory, 'static-publication-index.json');
+  const manifestPath = join(directory, 'static-export-manifest.json');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const priorCopyBaseCount = paths.filter((path) =>
+    /^private-copy-bases\/[a-f0-9]{64}\/static-publication-index\.json$/.test(path)).length;
+
+  if (publication.publicationId !== manifest.publicationId ||
+      publication.revisionSha256 !== manifest.revisionSha256 ||
+      publication.indexSha256 !== manifest.indexSha256 ||
+      publication.indexSha256 !== digest(indexPath) ||
+      publication.manifestSha256 !== digest(manifestPath) ||
+      publication.priorCopyBaseCount !== priorCopyBaseCount) {
+    throw new Error('Publication summary differs from verified output');
+  }
+}
+
 if (process.versions.node !== lock.toolchain.node || command('npm', ['--version'], root) !== lock.toolchain.npm) {
   throw new Error('Use the Node and npm versions in demo-lock.json');
 }
@@ -46,6 +63,7 @@ try {
     if (digest(join(built, path)) !== lock.files[path]) throw new Error(`Output hash differs at ${path}`);
   }
 
+  verifyPublication(built, lock.publication, paths);
   renameSync(built, output);
   console.log(`Verified ${paths.length} files in ${output}`);
 } finally {
