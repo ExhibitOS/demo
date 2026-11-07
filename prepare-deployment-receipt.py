@@ -66,6 +66,7 @@ def main():
     parser.add_argument('--worker-id', required=True)
     parser.add_argument('--trigger', required=True)
     parser.add_argument('--output', required=True, help='New file inside private verification directory')
+    parser.add_argument('--lock-fd', type=int, help='Inherited descriptor for the existing deployment lock')
     args = parser.parse_args()
     if not re.fullmatch(r'[0-9a-f-]{36}', args.build): raise ValueError('Invalid build ID')
     if not re.fullmatch(r'[0-9a-f]{32}', args.account) or not re.fullmatch(r'[0-9a-f]{32}', args.worker_id) or not re.fullmatch(r'[0-9a-f-]{36}', args.trigger): raise ValueError('Invalid provider identity')
@@ -73,8 +74,15 @@ def main():
     root = Path('/Volumes/ExhibitSSD/ExhibitOS/.local/verification').resolve()
     target = Path(args.output)
     if not target.is_absolute() or not target.parent.is_dir() or target.parent.resolve() != root or target.name in ('', '.', '..') or target.exists(): raise ValueError('Output must be a new direct child of private verification directory')
-    lease = Path('/Volumes/ExhibitSSD/ExhibitOS/.local/exhibitos-deployment-exhibitos-viewer-demo.lock').open('a+')
-    fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    lock_path = Path('/Volumes/ExhibitSSD/ExhibitOS/.local/exhibitos-deployment-exhibitos-viewer-demo.lock')
+    if args.lock_fd is None:
+        lease = lock_path.open('a+')
+        lock_fd = lease.fileno()
+    else:
+        lock_fd = args.lock_fd
+        expected, actual = lock_path.stat(), os.fstat(lock_fd)
+        if (expected.st_dev, expected.st_ino) != (actual.st_dev, actual.st_ino): raise ValueError('Incorrect inherited lock descriptor')
+    fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
     build_token = os.environ['CLOUDFLARE_BUILDS_API_TOKEN']
     inspection_token = os.environ['CLOUDFLARE_DEMO_INSPECTION_API_TOKEN']
     lock = json.loads(Path('demo-lock.json').read_text())
