@@ -113,7 +113,9 @@ def main():
     expected_count = len(lock['files'])
     if logs.get('truncated') is not False or version_lines != ['Current Version ID: ' + version] or not any(re.fullmatch(r'Verified ' + str(expected_count) + r' files in .+', line.strip()) for line in lines):
         raise ValueError('Build log does not prove deployed version and output verification')
-    manifest = read(ORIGIN + 'static-export-manifest.json'); index = read(ORIGIN + 'static-publication-index.json'); html = read(ORIGIN + 'index.html')
+    # Workers Static Assets redirects /index.html to /; fetch the canonical
+    # root directly while continuing to refuse all redirects.
+    manifest = read(ORIGIN + 'static-export-manifest.json'); index = read(ORIGIN + 'static-publication-index.json'); html = read(ORIGIN)
     manifest_sha = digest(manifest); index_sha = digest(index); m = json.loads(manifest)
     if manifest_sha != lock['publication']['manifestSha256'] or index_sha != lock['publication']['indexSha256'] or m.get('indexSha256') != index_sha or m.get('format') != 'exhibitos-static-publication-v1' or m.get('publicationId') != lock['publication']['publicationId'] or m.get('revisionSha256') != lock['publication']['revisionSha256']:
         raise ValueError('Live publication differs from lock')
