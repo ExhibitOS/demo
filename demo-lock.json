@@ -1,10 +1,10 @@
 {
   "platform": {
     "url": "https://github.com/ExhibitOS/platform.git",
-    "commit": "8fd8e2dbd4386f55535b55635914126f6d738523",
-    "tree": "3a130f6a039f97fa3ef6582446bde3628ea9f252",
+    "commit": "9a4f9ad2970b54e7c4cd8e3b705aaedb44c182aa",
+    "tree": "e37277d63c8d67834342154a71975835c2883d0f",
     "lockSha256": "df37340fc3a85eac4d1cc54e3c585fa83c2f350b663c6dfc370533c7ca5c55f0",
-    "buildId": "dd1f3c672f304c49935586e67b6f5e4c715bb4ccedfa458daba025dfe9d6959e"
+    "buildId": "168744fbd4975f41806aaca393167660e9cb25d093a8f95641b395ad849a12ca"
   },
   "toolchain": {
     "node": "24.21.0",
@@ -15,7 +15,7 @@
     "publicationId": "625618bf-8b63-448c-abd6-08f1bb7dd68e",
     "revisionSha256": "34024d16fdce3c1fe44a550217352df6545f6821d26fcaf0893350c70a5311f2",
     "indexSha256": "896f66289538e47f9bc182a0458089b5308c4535babbd998e84cdeaa7b34a1c9",
-    "manifestSha256": "3e7c366f504e7b3af52d848310eba09824ae5b584aba0cbc0a83b90419ccad8d",
+    "manifestSha256": "b0fa97b92f63ea9fc85f6c71e9178834dc5209ca07aea755a053cd8c35008594",
     "priorCopyBaseCount": 12
   },
   "files": {
@@ -31,8 +31,8 @@
     "assets/RectAreaLightUniformsLib-CuQGOBEq.js": "753489d8907716e4b4b940c34e959dd56a70116794319750dbc40b0c53d8c2b6",
     "assets/RoomEnvironment-DHGKyIK-.js": "70fbc36c4347d9a1ca8b707753595c59114bf161cb6f6e0aca41a52d03ea572a",
     "assets/USDZExporter-BRezTANE.js": "4cf18e85e9c8779bf1563526aa6b413271e561c1e016a3acaffba0b6edc055ba",
+    "assets/Viewer-CHUA4sOi.js": "4bfc56cca0e67a2576947e2cc281e8484bfd0ac17876717563f2998aa47c0443",
     "assets/Viewer-DhWGdxve.css": "7686264334737a47936336e14829e249f4159401ed5fa20c04510bd54bf67f75",
-    "assets/Viewer-DyikNEN1.js": "5e9e55880aca10e3db60da9105ac650cfba4bb1a7cb21180df562b85c5057549",
     "assets/artwork-validation-D7HvqSX1.js": "6f17c0536d00f58af650df62c45d4e515b8fd2176a7c274d26167feb2c4f1050",
     "assets/basis_transcoder-VXdx5NbI.wasm": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a",
     "assets/basis_transcoder-o4Hde_L7.js": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1",
@@ -43,8 +43,8 @@
     "assets/panel-resume-C1EEwa3E.css": "98896b33dbf2ba85f584ddfa52f5d8f8eac23d2eed6b809f43f1cfc7237d5a8a",
     "assets/panel-resume-Fyuv9Z-P.js": "87e4ca6a26ad54aa069659b23d17965362d5e926b7db5f505eb2b50ff637b191",
     "assets/private-view-Cidippu2.js": "b046e635a17984dcbc53b081c1986e5a218dfd103ef44a0802a3d70cec044f71",
-    "assets/static-DSsV_xaH.js": "a6654827024c61015c9f1a035de584ffa7b65e2ab0815d9c3872cd1baa733762",
-    "assets/static-DTGkMmrK.css": "6acb6bd9949ea47295bed1825cf7dcb4887461fcc8149550d0acfe8b23169450",
+    "assets/static-BsrMxfhO.css": "e4eb0283e8019db0f312737f8c567909c9742d1e0347da5fda424cbab704c200",
+    "assets/static-DaZ391pc.js": "47de5fe390ad1f28ea91a4bbcee6b7e25c5cb9c055b1a8a7b068fc9e96e0f359",
     "assets/static-studio-B3R97eOl.js": "8af8a30f343f5ccf400a8869ca8f98e7566184005904faf5f75fd05dbb5fe60a",
     "assets/style-8uuBZsRo.css": "5dcb655af0b0c5b97499cd8cead99b3032961b1b0fe82df6bdbc8db248e1f979",
     "assets/style-B9BRrpFp.js": "23f10a44822cafcc1df440c50519a56df6cdfeb53bd01d14cb4c7f526cf1a96c",
@@ -108,7 +108,7 @@
     "floor-textures/quiet-oak-herringbone/1/roughness-f889803f9d84.png": "f889803f9d84abb882bbe2405603a5443389187a7152061f7c043631ce85b717",
     "furnish-catalog/backless-oak-bench/1/LICENSE-NOTICE.txt": "aea7aac82234e5f4158a901e84a753b79c75da20b72e859493801dffeaae3de5",
     "furnish-catalog/backless-oak-bench/1/model.glb": "364f12fc71c4572df5df5ea1b77b4b7c00d77d256459ec1c24657bb92a5c0e2b",
-    "index.html": "7c576cfd22e06934ac08640fb8671acca93e2392c15509753dd746bdac6a29f3",
+    "index.html": "7c2a9d8fd98af0499f014a0b49cad0084ed32fd7372633d595ea8280c74dfd2f",
     "material-catalogue-thumbnails/fine-gallery-concrete/1/preview-82b907f0df15.png": "82b907f0df15c881ce06d76c04f73f285edd555d23c56524f67242b754dacf8e",
     "material-catalogue-thumbnails/quiet-oak-herringbone/1/preview-4423a1fc11dc.png": "4423a1fc11dc52075ae1882d6971c656819630098696b77608b7309d0e53c9a9",
     "private-copy-bases/244eaab6adfea79261cce49dc971ffd23ce10af42961c093b31ac6430c8398c1/data/319630828b4a2a0812628c8af13968e64a19a2830d79af9012ddd67f2712a3b3.json": "319630828b4a2a0812628c8af13968e64a19a2830d79af9012ddd67f2712a3b3",
@@ -135,9 +135,9 @@
     "private-copy-bases/febd4030f53b3d1684af103bac09a8f674531ede7c233ed25d3b92042886aa1b/static-publication-index.json": "febd4030f53b3d1684af103bac09a8f674531ede7c233ed25d3b92042886aa1b",
     "private-copy-bases/ff72d9ab408f336e3a90fd6ca47da4303b05a87fe9009e9c5a07adad492f3541/data/4761070ec03dfb5ec70a82fd1b692d1f46249cdad4f9b33f3118ef6e257af8e4.json": "4761070ec03dfb5ec70a82fd1b692d1f46249cdad4f9b33f3118ef6e257af8e4",
     "private-copy-bases/ff72d9ab408f336e3a90fd6ca47da4303b05a87fe9009e9c5a07adad492f3541/static-publication-index.json": "ff72d9ab408f336e3a90fd6ca47da4303b05a87fe9009e9c5a07adad492f3541",
-    "static-export-manifest.json": "3e7c366f504e7b3af52d848310eba09824ae5b584aba0cbc0a83b90419ccad8d",
+    "static-export-manifest.json": "b0fa97b92f63ea9fc85f6c71e9178834dc5209ca07aea755a053cd8c35008594",
     "static-publication-index.json": "896f66289538e47f9bc182a0458089b5308c4535babbd998e84cdeaa7b34a1c9",
-    "studio.html": "0c90a028ef1513d970914b6ff931b0e32842fbe7b81f8bbb44d6438c4f310856",
+    "studio.html": "68f25789b65b7c18788a295e9f6ed228fe395b7a5deb8bb594a113eb19708ee8",
     "surface-material-notices/fine-gallery-concrete-1.txt": "5953f6ffbb434db184d6e5af933a7600ce564b85df1173ed87ba041a9ced6288",
     "surface-material-notices/fine-lime-plaster-1.txt": "36d175c95c1d07e4d306c64f87468a7d63f2199edcc472ac2837deebc0414b33",
     "surface-material-notices/museum-matte-paint-1.txt": "dd2097de8126b398fe4e6fd7ab3c4fbb20b5347d92915b9a6c85bd1ab0050583",
