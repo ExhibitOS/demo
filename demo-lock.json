@@ -3,7 +3,7 @@
     "url": "https://github.com/ExhibitOS/platform.git",
     "commit": "a7ea096d3d21dd4777cb31a69a887b980b8eddda",
     "tree": "a9fd284fc4c5b94cefd8c478cc2aa8cec1050695",
-    "lockSha256": "3f402eddf68ca77d5ce3ee72e4ee1ade4ffbdbf954f5f10e0414e5ead98408be",
+    "lockSha256": "7655aa1816541302f4bd81b0b776167f094a485b8bdd4ee9b54e8863979420f6",
     "buildId": "3bb251aa7e419fa77c69b220a05082bacbaaf49320780309f2a7ec755926b476"
   },
   "toolchain": {
