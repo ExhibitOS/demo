@@ -1,0 +1,11 @@
+{
+  "schema": "exhibitos-deployment-receipt-v1",
+  "artifactManifestSha256": "82be784346a41170eebf515857b34eb3326c60377ef056402ecf2b4593486699",
+  "runtimeSourceCommit": "a789a07dd9d381614e655b492664b02ed7226491",
+  "buildId": "ad0a56fb5e5606c2962c7420982db9d6f8cfc319815168f7820e6f10898f08ad",
+  "confirmedDeploymentAt": "2026-11-10T08:05:42.143181Z",
+  "verifiedAt": "2026-11-10T08:07:47.000Z",
+  "deploymentId": "41f01f72-9f13-40bd-b47d-5f0a540a4d6b",
+  "workerVersionId": "e6497aad-c60a-414c-811f-b3e266bd3043",
+  "trafficPercent": 100
+}
