@@ -31,7 +31,8 @@ export function verifyNativeInput(dir, pin, publication, platform) {
   const integrityStat = lstatSync(integrityPath);
   if (!integrityStat.isFile() || integrityStat.isSymbolicLink() || digest(integrityPath) !== pin.inventorySha256) throw new Error('Native inventory differs');
   const inv = JSON.parse(readFileSync(integrityPath, 'utf8'));
-  if (inv.format !== 'exhibitos-reference-native-input-v1' || inv.indexSha256 !== pin.indexSha256 || !Array.isArray(inv.files) || inv.files.length !== 178) throw new Error('Invalid native inventory');
+  const fileCount = pin.fileCount ?? 178;
+  if (![178, 179].includes(fileCount) || inv.format !== 'exhibitos-reference-native-input-v1' || inv.indexSha256 !== pin.indexSha256 || !Array.isArray(inv.files) || inv.files.length !== fileCount) throw new Error('Invalid native inventory');
   const paths = inv.files.map(e => e.path);
   if (new Set(paths).size !== paths.length || paths.some(p => typeof p !== 'string' || !/^(?:closure\.json|web-inventory\.json|(?:source|web)\/[A-Za-z0-9_.\/-]+)$/.test(p) || p.split('/').some(s => !s || s === '.' || s === '..'))) throw new Error('Invalid native input path');
   const actual = inventory(dir).filter(p => p !== 'integrity.json').sort();
