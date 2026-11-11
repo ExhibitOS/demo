@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
-import { verifyNativeInput } from './verify-native-input.mjs';
+import { nativeInputDirectoryKey, verifyNativeInput } from './verify-native-input.mjs';
 const h = b => createHash('sha256').update(b).digest('hex');
 function setup(t) {
   const dir = mkdtempSync(join(tmpdir(), 'demo-native-input-')); t.after(() => rmSync(dir, {recursive:true,force:true}));
@@ -23,3 +23,5 @@ test('closed pinned native input accepts exact files',t=>{const x=setup(t);asser
 test('rejects tampered file, extra input and mismatched viewer identity',t=>{const x=setup(t);writeFileSync(join(x.dir,'source/f0'),'x');assert.throws(()=>verifyNativeInput(x.dir,x.pin,x.pub,x.platform));writeFileSync(join(x.dir,'source/f0'),'0');writeFileSync(join(x.dir,'web/extra'),'x');assert.throws(()=>verifyNativeInput(x.dir,x.pin,x.pub,x.platform));rmSync(join(x.dir,'web/extra'));assert.throws(()=>verifyNativeInput(x.dir,x.pin,x.pub,{...x.platform,viewerSourceCommit:'1'.repeat(40)}));});
 test('rejects symlink substitution',t=>{const x=setup(t);rmSync(join(x.dir,'source/f0'));symlinkSync(join(x.dir,'source/f1'),join(x.dir,'source/f0'));assert.throws(()=>verifyNativeInput(x.dir,x.pin,x.pub,x.platform));});
 test('separately pins raw native and hosted manifest identities',t=>{const x=setup(t);const hosted={...x.pub,manifestSha256:'1'.repeat(64)};assert.equal(verifyNativeInput(x.dir,x.pin,hosted,x.platform),178);assert.throws(()=>verifyNativeInput(x.dir,{...x.pin,sourceManifestSha256:'2'.repeat(64)},hosted,x.platform));const missing={...x.pin};delete missing.sourceManifestSha256;assert.throws(()=>verifyNativeInput(x.dir,missing,hosted,x.platform));});
+
+test('native bundle paths preserve legacy index and require exact inventory-keyed identity',()=>{const a='a'.repeat(64), b='b'.repeat(64);assert.equal(nativeInputDirectoryKey({indexSha256:a,inventorySha256:b}),a);assert.equal(nativeInputDirectoryKey({indexSha256:a,inventorySha256:b,inputId:b}),b);assert.throws(()=>nativeInputDirectoryKey({indexSha256:a,inventorySha256:b,inputId:'../bad'}));assert.throws(()=>nativeInputDirectoryKey({indexSha256:a,inventorySha256:b,inputId:a}));});
