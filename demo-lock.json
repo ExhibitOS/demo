@@ -1,8 +1,8 @@
 {
   "platform": {
     "url": "https://github.com/ExhibitOS/platform.git",
-    "commit": "09e707f87b8c6ff924b559f985321c0b93df9ef9",
-    "tree": "8fc0bc6404c94e59f8144c0bca4f33b7121f489a",
+    "commit": "48155ad7a0b8b2ff0d3967a30b525316be92aae5",
+    "tree": "6c08fb1494e1d5d0a4c40727e07b768ef2f32f7b",
     "lockSha256": "4a226d782ddab607233436195474f1b792a34926d312ed3f4721cf082f04072d",
     "buildId": "aa8d46a1574db261c49d95d801514992005574ad1389d323305dbc5ca6901996",
     "viewerSourceCommit": "8de6622192f0e5f8708f4f9106a7c03dedda6b8e",
@@ -14,15 +14,15 @@
     "wrangler": "4.147.0"
   },
   "publication": {
-    "publicationId": "094e0295-1dba-4d3c-8ebc-d534c1f7b347",
-    "revisionSha256": "0bbbf3897d6396561e3239c1063a20af38e964850091c9d52bf0f8db94cb7b52",
-    "indexSha256": "4072e5df4e44b0a760711612f5fbae6c0c01c134650b5062cba370e7360d2211",
-    "manifestSha256": "746791997a6843b4c5e15533630ad55b412d8c2edbc04039891ac202078dd3f6",
+    "publicationId": "b9131ed0-d337-4150-b165-45eb5c7ef7ff",
+    "revisionSha256": "3e2bf2eccf920ec72d569ca7b5c1230bec3824488d1bfdf301cdcdc0ae1ef034",
+    "indexSha256": "8a9b441381e099f8d7c8018b3689d2d1a0d826ac5f9b8dbac146b67253a6ce8d",
+    "manifestSha256": "67da9ee82c9ac03dfa85f5f02edd02d04ce9efb014584a653b7f85bdcfd11099",
     "priorCopyBaseCount": 0
   },
   "files": {
     "THIRD_PARTY_NOTICES.txt": "d2c6cf79191a08b1c498ed27fe96fd76b49015f6b8d9dd2f4a6d5742ec05fd2a",
-    "_headers": "9cce279ed35dee5b1e13071573f5322386635558f78cba335dc61bb25f0c5362",
+    "_headers": "1a0a4821078c8c2c51b550d0d1e33f87ea5688c60d00b5af5889965fb70879e0",
     "assets/AudioControls-CVxiRbBA.js": "8c89b2112845aff7eaaf31ed95cc419ea0fd7fe032ff32c136c01eab2580aeae",
     "assets/AudioControls-CchaK4nt.css": "63cbf0e818672a4b0ed3709cc6421ae710d81c99a19226a0d99ccb6f3582888e",
     "assets/GLTFLoader-Dx2qH6Bu.js": "f4000dff3487c79221e340c2cc2c69cd59acd820f99c7f6f9da8ddcecd24c295",
@@ -80,7 +80,6 @@
     "data/613c65390ae5a2b9fc338d622a5c29bcb4efdf0d2749f9c5768d8c3aca86ccb5.bin": "613c65390ae5a2b9fc338d622a5c29bcb4efdf0d2749f9c5768d8c3aca86ccb5",
     "data/618daca30a012b88db88f516b35001eefa86322e10a0e4722888be64887afcbd.bin": "618daca30a012b88db88f516b35001eefa86322e10a0e4722888be64887afcbd",
     "data/645290fbe623e74da82dae25734e8e6d5123f40f85343ad11cf0d990f8b3e4e0.bin": "645290fbe623e74da82dae25734e8e6d5123f40f85343ad11cf0d990f8b3e4e0",
-    "data/65f54ad7a5759079412710b05356f110b77bde1b8096756c3d9d1ff3bf1a6224.json": "65f54ad7a5759079412710b05356f110b77bde1b8096756c3d9d1ff3bf1a6224",
     "data/6924041a37702eb8233bf39da973f2235ff951f4b1f31ab564d4ad125542b3de.bin": "6924041a37702eb8233bf39da973f2235ff951f4b1f31ab564d4ad125542b3de",
     "data/694a9cf81dfbf12fd0841ae45240c5ae0f1d7cb129d0ee122be7cff86c4625bc.bin": "694a9cf81dfbf12fd0841ae45240c5ae0f1d7cb129d0ee122be7cff86c4625bc",
     "data/6caca94361b540fb007c6fc605e519e436462eda43f2ec5f99da6a63108bfc60.bin": "6caca94361b540fb007c6fc605e519e436462eda43f2ec5f99da6a63108bfc60",
@@ -103,6 +102,7 @@
     "data/b46d02a42fd3bb13b022cefc5beaa997b1d7a28cd7b53e4413d940aa0dc4014d.bin": "b46d02a42fd3bb13b022cefc5beaa997b1d7a28cd7b53e4413d940aa0dc4014d",
     "data/b79822fc08c007120de51cbaebf1caf71bd7387ac27c43b5bf9326c93540b0b3.bin": "b79822fc08c007120de51cbaebf1caf71bd7387ac27c43b5bf9326c93540b0b3",
     "data/b9957bf0931550477e636ea64619f755e1056b124fb5f730dd8b6035c99d275c.bin": "b9957bf0931550477e636ea64619f755e1056b124fb5f730dd8b6035c99d275c",
+    "data/c78d53c9324598f7f3ef5ad0685239d25c5afa8077df6023b3961d36da13d386.json": "c78d53c9324598f7f3ef5ad0685239d25c5afa8077df6023b3961d36da13d386",
     "data/c8e2802c8ebf416474b402bb6c439d15f31952c45df144d349c75045e8604138.bin": "c8e2802c8ebf416474b402bb6c439d15f31952c45df144d349c75045e8604138",
     "data/ca1aecb7b83af351303c35957372b619375c361dfef00d3c3287c754dca81f04.bin": "ca1aecb7b83af351303c35957372b619375c361dfef00d3c3287c754dca81f04",
     "data/cde67c823c0fed9574d94d4a95facbcc7e3b7782af8424d55fb41c8a53c250b7.bin": "cde67c823c0fed9574d94d4a95facbcc7e3b7782af8424d55fb41c8a53c250b7",
@@ -143,12 +143,12 @@
     "floor-textures/quiet-oak-herringbone/1/roughness-f889803f9d84.png": "f889803f9d84abb882bbe2405603a5443389187a7152061f7c043631ce85b717",
     "furnish-catalog/backless-oak-bench/1/LICENSE-NOTICE.txt": "aea7aac82234e5f4158a901e84a753b79c75da20b72e859493801dffeaae3de5",
     "furnish-catalog/backless-oak-bench/1/model.glb": "364f12fc71c4572df5df5ea1b77b4b7c00d77d256459ec1c24657bb92a5c0e2b",
-    "index.html": "ab6eea38cbcf19fbc81b9155742c91bc344f85b00a9ff832b4a74d826aea2d36",
+    "index.html": "89c681cf23636255938f22d37029335e448907770a1ca3e227c35b4f4021c47f",
     "material-catalogue-thumbnails/fine-gallery-concrete/1/preview-82b907f0df15.png": "82b907f0df15c881ce06d76c04f73f285edd555d23c56524f67242b754dacf8e",
     "material-catalogue-thumbnails/quiet-oak-herringbone/1/preview-4423a1fc11dc.png": "4423a1fc11dc52075ae1882d6971c656819630098696b77608b7309d0e53c9a9",
-    "static-export-manifest.json": "746791997a6843b4c5e15533630ad55b412d8c2edbc04039891ac202078dd3f6",
-    "static-publication-index.json": "4072e5df4e44b0a760711612f5fbae6c0c01c134650b5062cba370e7360d2211",
-    "studio.html": "caa19e64c6f7357b3a53388554dfff1f53b9c3c11cf75528c6ab567589334e34",
+    "static-export-manifest.json": "67da9ee82c9ac03dfa85f5f02edd02d04ce9efb014584a653b7f85bdcfd11099",
+    "static-publication-index.json": "8a9b441381e099f8d7c8018b3689d2d1a0d826ac5f9b8dbac146b67253a6ce8d",
+    "studio.html": "618845bf62212fb00da00108a996e27af19c4e090b3799700be7e572b265ff5d",
     "surface-material-notices/fine-gallery-concrete-1.txt": "5953f6ffbb434db184d6e5af933a7600ce564b85df1173ed87ba041a9ced6288",
     "surface-material-notices/fine-lime-plaster-1.txt": "36d175c95c1d07e4d306c64f87468a7d63f2199edcc472ac2837deebc0414b33",
     "surface-material-notices/museum-matte-paint-1.txt": "dd2097de8126b398fe4e6fd7ab3c4fbb20b5347d92915b9a6c85bd1ab0050583",
@@ -166,12 +166,12 @@
   },
   "nativeClosure": {
     "url": "https://github.com/ExhibitOS/demo.git",
-    "commit": "a60057484502a247067651953776f05abba56ec1",
-    "tree": "e2fa24afe8f3280222a2d8a3c0aadebaedd907ce",
-    "indexSha256": "4072e5df4e44b0a760711612f5fbae6c0c01c134650b5062cba370e7360d2211",
-    "inventorySha256": "c88c60c25a189fbaca554fc767fd29bd1d8701999d977d2d79cbcdd70f24b4cb",
-    "sourceManifestSha256": "917192929b0885d69861b759316fbffcc443f04e617d3cab7a784170a0453231",
-    "inputId": "c88c60c25a189fbaca554fc767fd29bd1d8701999d977d2d79cbcdd70f24b4cb",
+    "commit": "fc280284f79a7a68ac55795ed562617a55b93200",
+    "tree": "c472981cbc46aa652ef665def4c96bf94fd017b0",
+    "indexSha256": "8a9b441381e099f8d7c8018b3689d2d1a0d826ac5f9b8dbac146b67253a6ce8d",
+    "inventorySha256": "2359e918dc1a11f8b2e5b6011fd9c58caff2c063aef4250f3837c81420d039d3",
+    "sourceManifestSha256": "c16a17f1bee0858f7b6554cac5b53b95330d0f611d4233ea589b126fca85465d",
+    "inputId": "2359e918dc1a11f8b2e5b6011fd9c58caff2c063aef4250f3837c81420d039d3",
     "fileCount": 179
   }
 }
