@@ -3,7 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, renameSync, rmSync, readdirSync,
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { digest, verifyOutput } from './verify-output.mjs';
-import { verifyNativeInput } from './verify-native-input.mjs';
+import { nativeInputDirectoryKey, verifyNativeInput } from './verify-native-input.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const lock = JSON.parse(readFileSync(join(root, 'demo-lock.json'), 'utf8'));
@@ -57,7 +57,7 @@ try {
     if (command('git', ['rev-parse', 'HEAD'], content) !== c.commit || command('git', ['rev-parse', 'HEAD^{tree}'], content) !== c.tree) throw new Error('Native content commit/tree differs');
     const parent = join(content, 'reference-native');
     if (!lstatSync(parent).isDirectory() || lstatSync(parent).isSymbolicLink()) throw new Error('Invalid native content parent');
-    const dir = join(parent, c.indexSha256);
+    const dir = join(parent, nativeInputDirectoryKey(c));
     verifyNativeInput(dir, c, lock.publication, lock.platform);
     buildEnv.EXHIBITOS_REFERENCE_NATIVE_CLOSURE = dir;
     buildEnv.EXHIBITOS_REFERENCE_NATIVE_INTEGRITY_SHA256 = c.inventorySha256;

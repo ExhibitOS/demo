@@ -17,6 +17,12 @@ function inventory(root, prefix = '') {
   return paths;
 }
 
+export function nativeInputDirectoryKey(pin) {
+  if (pin.inputId === undefined) return pin.indexSha256;
+  if (!hex64.test(pin.inputId) || pin.inputId !== pin.inventorySha256) throw new Error('Invalid native input directory pin');
+  return pin.inputId;
+}
+
 export function verifyNativeInput(dir, pin, publication, platform) {
   const rootStat = lstatSync(dir);
   if (!rootStat.isDirectory() || rootStat.isSymbolicLink()) throw new Error('Invalid native input directory');
