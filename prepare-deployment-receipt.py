@@ -86,7 +86,7 @@ def main():
     build_token = os.environ['CLOUDFLARE_BUILDS_API_TOKEN']
     inspection_token = os.environ['CLOUDFLARE_DEMO_INSPECTION_API_TOKEN']
     lock = json.loads(Path('demo-lock.json').read_text())
-    commit, source = git('rev-parse', 'HEAD'), lock['platform']['commit']
+    commit, source = git('rev-parse', 'HEAD'), (lock['platform']['viewerSourceCommit'] if lock.get('nativeClosure') else lock['platform']['commit'])
     if not HEX40.fullmatch(commit) or not HEX40.fullmatch(source): raise ValueError('Invalid commit')
     if git('status', '--porcelain'): raise ValueError('Checkout is not clean')
     remote = git('ls-remote', '--exit-code', 'https://github.com/ExhibitOS/demo.git', 'refs/heads/main').split()[0]

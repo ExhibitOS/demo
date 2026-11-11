@@ -3,6 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, renameSync, rmSync, readdirSync,
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { digest, verifyOutput } from './verify-output.mjs';
+import { verifyNativeInput } from './verify-native-input.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const lock = JSON.parse(readFileSync(join(root, 'demo-lock.json'), 'utf8'));
@@ -43,7 +44,24 @@ try {
 
   const buildEnv = { ...process.env };
   delete buildEnv.EXHIBITOS_QUALIFIED_REFERENCE_SOURCE;
-  if (lock.content) {
+  delete buildEnv.EXHIBITOS_REFERENCE_NATIVE_CLOSURE;
+  delete buildEnv.EXHIBITOS_REFERENCE_NATIVE_INTEGRITY_SHA256;
+  if (lock.content && lock.nativeClosure) throw new Error('Ambiguous reference input');
+  if (lock.nativeClosure) {
+    const c = lock.nativeClosure;
+    if (c.url !== 'https://github.com/ExhibitOS/demo.git' || !/^[a-f0-9]{40}$/.test(c.commit) || !/^[a-f0-9]{40}$/.test(c.tree) || !/^[a-f0-9]{64}$/.test(c.indexSha256)) throw new Error('Invalid native closure pin');
+    content = mkdtempSync(join(root, '.content-demo-'));
+    command('git', ['init', '--quiet'], content);
+    command('git', ['fetch', '--no-tags', '--depth=1', c.url, c.commit], content);
+    command('git', ['checkout', '--quiet', '--detach', 'FETCH_HEAD'], content);
+    if (command('git', ['rev-parse', 'HEAD'], content) !== c.commit || command('git', ['rev-parse', 'HEAD^{tree}'], content) !== c.tree) throw new Error('Native content commit/tree differs');
+    const parent = join(content, 'reference-native');
+    if (!lstatSync(parent).isDirectory() || lstatSync(parent).isSymbolicLink()) throw new Error('Invalid native content parent');
+    const dir = join(parent, c.indexSha256);
+    verifyNativeInput(dir, c, lock.publication, lock.platform);
+    buildEnv.EXHIBITOS_REFERENCE_NATIVE_CLOSURE = dir;
+    buildEnv.EXHIBITOS_REFERENCE_NATIVE_INTEGRITY_SHA256 = c.inventorySha256;
+  } else if (lock.content) {
     const c = lock.content;
     if (c.url !== 'https://github.com/ExhibitOS/demo.git' || !/^[a-f0-9]{40}$/.test(c.commit) || !/^[a-f0-9]{40}$/.test(c.tree) || !/^[a-f0-9]{64}$/.test(c.indexSha256) || !/^[a-f0-9]{64}$/.test(c.inventorySha256) || c.indexSha256 !== lock.publication.indexSha256) throw new Error('Invalid content pin');
     content = mkdtempSync(join(root, '.content-demo-'));
