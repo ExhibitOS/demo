@@ -20,7 +20,7 @@ function inventory(root, prefix = '') {
 export function verifyNativeInput(dir, pin, publication, platform) {
   const rootStat = lstatSync(dir);
   if (!rootStat.isDirectory() || rootStat.isSymbolicLink()) throw new Error('Invalid native input directory');
-  if (!hex64.test(pin.inventorySha256) || !hex64.test(pin.indexSha256) || pin.indexSha256 !== publication.indexSha256 || !hex40.test(platform.viewerSourceCommit ?? '') || !hex40.test(platform.viewerSourceTree ?? '')) throw new Error('Invalid native input pins');
+  if (!hex64.test(pin.inventorySha256) || !hex64.test(pin.sourceManifestSha256) || !hex64.test(pin.indexSha256) || pin.indexSha256 !== publication.indexSha256 || !hex40.test(platform.viewerSourceCommit ?? '') || !hex40.test(platform.viewerSourceTree ?? '')) throw new Error('Invalid native input pins');
   const integrityPath = join(dir, 'integrity.json');
   const integrityStat = lstatSync(integrityPath);
   if (!integrityStat.isFile() || integrityStat.isSymbolicLink() || digest(integrityPath) !== pin.inventorySha256) throw new Error('Native inventory differs');
@@ -35,6 +35,6 @@ export function verifyNativeInput(dir, pin, publication, platform) {
     if (!stat.isFile() || stat.isSymbolicLink() || !Number.isSafeInteger(entry.bytes) || entry.bytes < 0 || entry.bytes > 25 * 1024 * 1024 || stat.size !== entry.bytes || !hex64.test(entry.sha256) || digest(path) !== entry.sha256) throw new Error(`Invalid native input file ${entry.path}`);
   }
   const closure = JSON.parse(readFileSync(join(dir, 'closure.json'), 'utf8'));
-  if (closure.format !== 'exhibitos-reference-native-closure-v1' || closure.publication?.publicationId !== publication.publicationId || closure.publication?.revisionSha256 !== publication.revisionSha256 || closure.publication?.indexSha256 !== publication.indexSha256 || closure.publication?.manifestSha256 !== publication.manifestSha256 || closure.viewer?.sourceCommit !== platform.viewerSourceCommit || closure.viewer?.sourceTree !== platform.viewerSourceTree || closure.viewer?.buildId !== platform.buildId || closure.paths?.source !== 'source' || closure.paths?.web !== 'web' || closure.paths?.webInventory !== 'web-inventory.json') throw new Error('Native closure identity differs');
+  if (closure.format !== 'exhibitos-reference-native-closure-v1' || closure.publication?.publicationId !== publication.publicationId || closure.publication?.revisionSha256 !== publication.revisionSha256 || closure.publication?.indexSha256 !== publication.indexSha256 || closure.publication?.manifestSha256 !== pin.sourceManifestSha256 || closure.viewer?.sourceCommit !== platform.viewerSourceCommit || closure.viewer?.sourceTree !== platform.viewerSourceTree || closure.viewer?.buildId !== platform.buildId || closure.paths?.source !== 'source' || closure.paths?.web !== 'web' || closure.paths?.webInventory !== 'web-inventory.json') throw new Error('Native closure identity differs');
   return inv.files.length;
 }
