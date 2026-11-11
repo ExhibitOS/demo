@@ -1,0 +1,21 @@
+{
+  "format": "exhibitos-reference-native-closure-v1",
+  "publication": {
+    "publicationId": "43684ab7-f84d-4f34-b53c-a40348c7a661",
+    "revisionSha256": "a70f1e8a1f2230e292fa229ff89ff3248f812e539de573166cb651ed5408a64d",
+    "indexSha256": "cbe71a2a37906a4d618d01bb1524d5f5eadcebcdca938514c82bbd3215464e42",
+    "manifestSha256": "8837db6e81291a57df51308263867d7d6c2e71745f91dc47d2ca41c22dba96b8"
+  },
+  "viewer": {
+    "sourceCommit": "77492e63dd360bc7982210c54f62243d4558d852",
+    "sourceTree": "0546058e49eaf666fc8a50a8b43a6a736befb097",
+    "lockSha256": "4a226d782ddab607233436195474f1b792a34926d312ed3f4721cf082f04072d",
+    "buildId": "b54b543b7b9f5d14a3e0ed750240c087d50baa0302209e6dd4f71a93680f27a1",
+    "inventorySha256": "84bc824f08eebe006509f8f065507aa29dc6c3793d4219937202c4eb78e39ec8"
+  },
+  "paths": {
+    "source": "source",
+    "web": "web",
+    "webInventory": "web-inventory.json"
+  }
+}
