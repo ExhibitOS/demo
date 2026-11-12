@@ -1,0 +1,186 @@
+{
+  "format": "exhibitos-static-web-input-v1",
+  "buildId": "22e54a7516ccfe89261f1ea525ac28b7187b017c0334c492f3ef1519492132db",
+  "files": [
+    {
+      "path": "THIRD_PARTY_NOTICES.txt",
+      "bytes": 66723,
+      "sha256": "d2c6cf79191a08b1c498ed27fe96fd76b49015f6b8d9dd2f4a6d5742ec05fd2a"
+    },
+    {
+      "path": "assets/AudioControls-CchaK4nt.css",
+      "bytes": 3744,
+      "sha256": "63cbf0e818672a4b0ed3709cc6421ae710d81c99a19226a0d99ccb6f3582888e"
+    },
+    {
+      "path": "assets/AudioControls-KnR2SOqC.js",
+      "bytes": 358202,
+      "sha256": "2ca5e3e417e4d4a90487e47e2933674180612ca9b9e7f110303c6ed5232710da"
+    },
+    {
+      "path": "assets/GLTFLoader-Dx2qH6Bu.js",
+      "bytes": 45234,
+      "sha256": "f4000dff3487c79221e340c2cc2c69cd59acd820f99c7f6f9da8ddcecd24c295"
+    },
+    {
+      "path": "assets/KTX2Loader-CuZwUns2.js",
+      "bytes": 58990,
+      "sha256": "30f96420899f17512c5481163e635c699932df3befcf6705de29925f86f283a8"
+    },
+    {
+      "path": "assets/OrbitControls-DfuQ84Su.js",
+      "bytes": 19864,
+      "sha256": "87c1658c91ef1b734bf5c95fa9415f0bfd2ad21f0b51260685999adf354de2b7"
+    },
+    {
+      "path": "assets/PrivateExhibitionEditor-BDkSIhPZ.js",
+      "bytes": 74382,
+      "sha256": "a4ae6b1205c3f1404a008b55bf05097bd8fb539bc695b0fec26bc17c9a5feb83"
+    },
+    {
+      "path": "assets/PrivateExhibitionEditor-l5mELsHi.css",
+      "bytes": 10617,
+      "sha256": "3981177e8aa06c1a5dd5782bc4ff999fcf5abe26dd7c1dfb2814717c5cc1d57b"
+    },
+    {
+      "path": "assets/RectAreaLightUniformsLib-CuQGOBEq.js",
+      "bytes": 247274,
+      "sha256": "753489d8907716e4b4b940c34e959dd56a70116794319750dbc40b0c53d8c2b6"
+    },
+    {
+      "path": "assets/RoomEnvironment-DHGKyIK-.js",
+      "bytes": 2055,
+      "sha256": "70fbc36c4347d9a1ca8b707753595c59114bf161cb6f6e0aca41a52d03ea572a"
+    },
+    {
+      "path": "assets/USDZExporter-BRezTANE.js",
+      "bytes": 25179,
+      "sha256": "4cf18e85e9c8779bf1563526aa6b413271e561c1e016a3acaffba0b6edc055ba"
+    },
+    {
+      "path": "assets/Viewer-CG9EkHxq.js",
+      "bytes": 140469,
+      "sha256": "4f16fc54793ef598de6d864f8ac30a065bcd7f5612996e7ce1ffa57917ad75bf"
+    },
+    {
+      "path": "assets/Viewer-DhWGdxve.css",
+      "bytes": 19742,
+      "sha256": "7686264334737a47936336e14829e249f4159401ed5fa20c04510bd54bf67f75"
+    },
+    {
+      "path": "assets/artwork-validation-B3MG8LHY.js",
+      "bytes": 777470,
+      "sha256": "6cdc672383bfb691955013df605c38f0c1f9e870d10cb8623a9da03972fb66ec"
+    },
+    {
+      "path": "assets/basis_transcoder-VXdx5NbI.wasm",
+      "bytes": 527333,
+      "sha256": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a"
+    },
+    {
+      "path": "assets/basis_transcoder-o4Hde_L7.js",
+      "bytes": 57529,
+      "sha256": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1"
+    },
+    {
+      "path": "assets/model-D4ibN5qo.js",
+      "bytes": 8537,
+      "sha256": "e1712766348582b3eedfabf39a8610cdaf99b6948b4f01362785f6ac20018b36"
+    },
+    {
+      "path": "assets/model-DTeMyyFm.js",
+      "bytes": 1724,
+      "sha256": "468af1ee1e0125806d503077d11e5ebb22827a5f354ef52bc1a03387b4701a21"
+    },
+    {
+      "path": "assets/navigation-BNvacAPW.js",
+      "bytes": 4351443,
+      "sha256": "0724fc78e5a9f03bc8ec98f45e969a6b88dc326a8850d263a9af300df8a2c8bd"
+    },
+    {
+      "path": "assets/navigation-camera-VapNzoLY.js",
+      "bytes": 20372,
+      "sha256": "0d4a634ef561c8236a9c8e61bef2fec79af22ab975f24f0a3b7b487033450e41"
+    },
+    {
+      "path": "assets/panel-resume-C1EEwa3E.css",
+      "bytes": 866,
+      "sha256": "98896b33dbf2ba85f584ddfa52f5d8f8eac23d2eed6b809f43f1cfc7237d5a8a"
+    },
+    {
+      "path": "assets/panel-resume-Da1U3USs.js",
+      "bytes": 91098,
+      "sha256": "f1daa01c87564f6f1c6ae19ca092843115dcee12a4ec5dd16d337d7b2464d169"
+    },
+    {
+      "path": "assets/private-view-DesXh8fX.js",
+      "bytes": 1476,
+      "sha256": "3de297d21be5af5d4d93b1269688a15b0796f77b339d3f20473d02c05f755050"
+    },
+    {
+      "path": "assets/static-JIUvq2wG.js",
+      "bytes": 120931,
+      "sha256": "880b74ef0e3af27f6f65fb4a60631a28e5390e9b98da81b5dcd63448103064fa"
+    },
+    {
+      "path": "assets/static-studio-Bik76bgA.js",
+      "bytes": 14797,
+      "sha256": "c3a256e4be4c17c1a95ff2a07af22fef9991cc5ed2e28b5c0c5f175904d4118b"
+    },
+    {
+      "path": "assets/static-wnJfz1ZP.css",
+      "bytes": 82959,
+      "sha256": "8c11fa1816aed9fa1217ae790a5a76bab8e9e1793e74f8b21315a8f8c99d3f9a"
+    },
+    {
+      "path": "assets/style-B2jF7-PY.js",
+      "bytes": 288401,
+      "sha256": "5ef40d064c901aafb47b58f3ea93dffd687235e17ca3e507df1abaccfd9513a9"
+    },
+    {
+      "path": "assets/style-DH2w5TAL.css",
+      "bytes": 10862,
+      "sha256": "288895809c72eaf044922a0df89830532006baa6c94af1806698f5da055b9575"
+    },
+    {
+      "path": "assets/three.module-ByjkrwKL.js",
+      "bytes": 738298,
+      "sha256": "263a08e74e6080ab265e3692dfcff6975d4c2e7e12711a76230ae09f11075ed2"
+    },
+    {
+      "path": "basis/basis_transcoder.js",
+      "bytes": 57529,
+      "sha256": "8478b5b6d6b74e7d3082b89f6417321d8d1dc0307f2b30d4484bb11b441696a1"
+    },
+    {
+      "path": "basis/basis_transcoder.wasm",
+      "bytes": 527333,
+      "sha256": "6cf17dc889352c42e9acf8897107978d127005fe3386c36a0e3845e27967630a"
+    },
+    {
+      "path": "basis/exhibitos-basis-worker.js",
+      "bytes": 68805,
+      "sha256": "db4e90b304008ac396794f30b9f72897e4269080807e1546111bf9ae2c77b9ac"
+    },
+    {
+      "path": "static-studio.html",
+      "bytes": 883,
+      "sha256": "e863785cbca5372ef638a9e95ae2650c400101af22c23bc3f87979492e3db192"
+    },
+    {
+      "path": "static.html",
+      "bytes": 1105,
+      "sha256": "bea5945cf6274a6ee696ea8dc3b1944a5f73d9a37352a7ee934e437085be228f"
+    },
+    {
+      "path": "viewer-favicon.svg",
+      "bytes": 660,
+      "sha256": "c2d259310843e6c9f676ef8e3ecde72edf5305a94fb87afcea44b4657d558263"
+    },
+    {
+      "path": "voice-pcm-worklet.js",
+      "bytes": 654,
+      "sha256": "5102845526a4cd0bf2dfef4e66650c5e11b334c13c3915c3961cd1257793cae2"
+    }
+  ]
+}
