@@ -1,0 +1,17 @@
+Museum wallwasher — rear-relief source variant, version 20261111-v1
+
+Creator: ExhibitOS. The source variant is an ExhibitOS modification of the original ExhibitOS-generated wallwasher, removing material from the upper rear to address the specifically tested part crossings. The original asset and its historic notice remain unchanged. The original delivery reports no external models, image textures, or logos.
+
+The user directed CC0 1.0 Universal for ExhibitOS-created 3D models within rights held by the user: https://creativecommons.org/publicdomain/zero/1.0/
+
+Original GLB SHA-256: d85d9d1823c49bef412a23a59e238104f5b8ad342d8e8149efaf8d1110dc3290
+This source-variant GLB SHA-256: 6c77c618f040e673edbc1ffbd67f48c79deed6d11286474830b12d9cd6ba0823
+Creator provenance SHA-256: 7288da21b9f47d4e1a8bace8298989262f654a6460fc0f3c6199ea678b9346ee
+
+Any product-prepared derivative must retain its own identity and production receipt.
+
+
+Prepared renderable provenance
+Original GLB SHA-256: 6c77c618f040e673edbc1ffbd67f48c79deed6d11286474830b12d9cd6ba0823
+Renderable GLB SHA-256: 7c1c7bb441031b7496c80d1bd39edb66b31346887e928ce68a0f22fbf9bf7f8f
+Preparation: unused-invalid-tangent-v1, version 1. Removed only 1 invalid unused TANGENT attribute binding(s); all remaining JSON semantics and the complete BIN chunk are preserved.
