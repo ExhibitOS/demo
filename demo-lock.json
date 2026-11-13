@@ -1,9 +1,9 @@
 {
   "platform": {
     "url": "https://github.com/ExhibitOS/platform.git",
-    "commit": "b0884e8a904dd36894c5d90310275c35c60ae866",
-    "tree": "379f05cabf2eff1a0d5311625c32308d15aea29c",
-    "lockSha256": "59b94d64fd1744af0cc19702d07e50b9302715209ae5dea864e73b79537225cb",
+    "commit": "b6911e2e19cd37bfee3e9dbe9e7bc21cbaa6ff52",
+    "tree": "671e6a9f4bd279964a916ee6d256efed71bd1c09",
+    "lockSha256": "93d2f44dfb2dc31ab55dcf97c4a3861e117cb24d45eb1dac3f8699bb458469c3",
     "buildId": "5f1135b810578cb3921e80d6948962cfbaf77a0e38aa0077ac1fd728720eb632",
     "viewerSourceCommit": "ddf16d7cfc3c284aa3f292802b9c2ba170e4e4b3",
     "viewerSourceTree": "60bb83bc0a880dac2227ebcb7bf1013f7677f048"
@@ -14,15 +14,15 @@
     "wrangler": "4.147.0"
   },
   "publication": {
-    "publicationId": "74507457-2edc-4d72-a1bf-a90e6d34984b",
-    "revisionSha256": "321c61142228633951c7ac35f9762d535054ca557f409d6b9eae3f6ecb6f586c",
-    "indexSha256": "171996d8e0872e63fc3766c611a6e8a2e64e58f8825c4285556d3ed7738d2fbc",
-    "manifestSha256": "da6a4550433f1c5e7316386988efc4f857e5fc042326b987cd4603c779a4ff23",
+    "publicationId": "495438cc-b2dc-40a7-a16b-a47297544471",
+    "revisionSha256": "8b9cb0abc4a30494eb6eb0b48791df644ef1a8c134d6f63bbba4dda253b7250b",
+    "indexSha256": "eb863c5b2610a98a81e3d6606c4a30e1076f048666ae2de674ffe6d069e9191d",
+    "manifestSha256": "9015a2901e1fae8bb1dded55b5780ec999e63c0c433deb2ec35421e356641b5d",
     "priorCopyBaseCount": 0
   },
   "files": {
     "THIRD_PARTY_NOTICES.txt": "9e2cbeeba04507f057885752b9387dd1fa8aaa35b90b41d8e0090f3fb10da6d0",
-    "_headers": "19224ddee2c995bcabd108d967b52f153c494e2bbd85ea6a158a4e81ec147cde",
+    "_headers": "b5d6c33fd951c8f89ebe52b2be0ed03b1e294d0aa4687741dd61198d5883251f",
     "assets/AudioControls-B4AZfmvX.js": "e84f9497053070031552af9c5ca2319dbc66f8fca752b38b3b550e9cf5812e46",
     "assets/AudioControls-CchaK4nt.css": "63cbf0e818672a4b0ed3709cc6421ae710d81c99a19226a0d99ccb6f3582888e",
     "assets/GLTFLoader-Dx2qH6Bu.js": "f4000dff3487c79221e340c2cc2c69cd59acd820f99c7f6f9da8ddcecd24c295",
@@ -76,12 +76,12 @@
     "data/40bf9841810044743345b69ce91f0d116da391f67399e131ca76504df646d3db.bin": "40bf9841810044743345b69ce91f0d116da391f67399e131ca76504df646d3db",
     "data/42c4d5adc2b51690c5dec78f742494c7424e7f364b35c45da6e5f557ed88a1d6.bin": "42c4d5adc2b51690c5dec78f742494c7424e7f364b35c45da6e5f557ed88a1d6",
     "data/4684fcb53dbc376f563a7c8bba97d48f660968198401fad0bdff143a14a2f909.bin": "4684fcb53dbc376f563a7c8bba97d48f660968198401fad0bdff143a14a2f909",
+    "data/4b14e45ccf14ed38eea90c50553733a0b97b1671b9ec377d900e5a947545f8b4.bin": "4b14e45ccf14ed38eea90c50553733a0b97b1671b9ec377d900e5a947545f8b4",
     "data/4e26824b897af85e781c102cf7f01e404e4266b4d5299088c2b29940facaccba.bin": "4e26824b897af85e781c102cf7f01e404e4266b4d5299088c2b29940facaccba",
     "data/4f82481db4fee3697aa4238f83524b74edef577424aafffba7bea6dea4715e45.bin": "4f82481db4fee3697aa4238f83524b74edef577424aafffba7bea6dea4715e45",
     "data/502cb5319b0c08ca009804bdf650a9bfcbdf8df24d5a830ab1249bf380c4f887.bin": "502cb5319b0c08ca009804bdf650a9bfcbdf8df24d5a830ab1249bf380c4f887",
     "data/52942a7f7f697d9ff6cd41b027052f28764f3bd7e41156324bbd7a9a92dee4af.bin": "52942a7f7f697d9ff6cd41b027052f28764f3bd7e41156324bbd7a9a92dee4af",
     "data/5c1ad69ca213cffe2119d7ff17f047ffe17973040b6777bdef97651df50e8d02.bin": "5c1ad69ca213cffe2119d7ff17f047ffe17973040b6777bdef97651df50e8d02",
-    "data/60366aa695c5d6d90bdbcbfe39fda09b3fdd7c846241bc55da5ce44c0a59ced7.json": "60366aa695c5d6d90bdbcbfe39fda09b3fdd7c846241bc55da5ce44c0a59ced7",
     "data/613c65390ae5a2b9fc338d622a5c29bcb4efdf0d2749f9c5768d8c3aca86ccb5.bin": "613c65390ae5a2b9fc338d622a5c29bcb4efdf0d2749f9c5768d8c3aca86ccb5",
     "data/618daca30a012b88db88f516b35001eefa86322e10a0e4722888be64887afcbd.bin": "618daca30a012b88db88f516b35001eefa86322e10a0e4722888be64887afcbd",
     "data/62fd3bc49e0e77ffde26f60dee7ddfbbac0939347d68ea53a94700de0695f1ae.bin": "62fd3bc49e0e77ffde26f60dee7ddfbbac0939347d68ea53a94700de0695f1ae",
@@ -102,6 +102,7 @@
     "data/93113c7b3517a06b7a0aba0b4c8a8c91f3b5f7460d116a1b0e042fa20842f9cc.bin": "93113c7b3517a06b7a0aba0b4c8a8c91f3b5f7460d116a1b0e042fa20842f9cc",
     "data/9911b4f93bd3b57a46fb09e978bdd34addf407e1924b1f2b56d4d0828cd895d0.bin": "9911b4f93bd3b57a46fb09e978bdd34addf407e1924b1f2b56d4d0828cd895d0",
     "data/9ed52a71458546f3f565105ea861d4cb8c33c7bc76b06dc7333ebc1a0044021b.bin": "9ed52a71458546f3f565105ea861d4cb8c33c7bc76b06dc7333ebc1a0044021b",
+    "data/9fecf74cb12c13d46f8aa4a189b152896658a37bd239a1c1f932251b0c1e1b2e.json": "9fecf74cb12c13d46f8aa4a189b152896658a37bd239a1c1f932251b0c1e1b2e",
     "data/a1488643875598a378d67ab10272ce508c3584773970808c770e1ed717447c59.bin": "a1488643875598a378d67ab10272ce508c3584773970808c770e1ed717447c59",
     "data/a29692e5bb1acea50e496758a034284bb15adddc2179acbac022e07ff982154c.bin": "a29692e5bb1acea50e496758a034284bb15adddc2179acbac022e07ff982154c",
     "data/aea7aac82234e5f4158a901e84a753b79c75da20b72e859493801dffeaae3de5.bin": "aea7aac82234e5f4158a901e84a753b79c75da20b72e859493801dffeaae3de5",
@@ -152,12 +153,12 @@
     "floor-textures/quiet-oak-herringbone/1/roughness-f889803f9d84.png": "f889803f9d84abb882bbe2405603a5443389187a7152061f7c043631ce85b717",
     "furnish-catalog/backless-oak-bench/1/LICENSE-NOTICE.txt": "aea7aac82234e5f4158a901e84a753b79c75da20b72e859493801dffeaae3de5",
     "furnish-catalog/backless-oak-bench/1/model.glb": "364f12fc71c4572df5df5ea1b77b4b7c00d77d256459ec1c24657bb92a5c0e2b",
-    "index.html": "ccb8dc31abcfbcb25f18e5086616df8f3553dd848843d370d476fd58423e13f8",
+    "index.html": "004897c826c12b90b4b0cd78bc6632e6b8490920e9499d01916c931b3d5a6833",
     "material-catalogue-thumbnails/fine-gallery-concrete/1/preview-82b907f0df15.png": "82b907f0df15c881ce06d76c04f73f285edd555d23c56524f67242b754dacf8e",
     "material-catalogue-thumbnails/quiet-oak-herringbone/1/preview-4423a1fc11dc.png": "4423a1fc11dc52075ae1882d6971c656819630098696b77608b7309d0e53c9a9",
-    "static-export-manifest.json": "da6a4550433f1c5e7316386988efc4f857e5fc042326b987cd4603c779a4ff23",
-    "static-publication-index.json": "171996d8e0872e63fc3766c611a6e8a2e64e58f8825c4285556d3ed7738d2fbc",
-    "studio.html": "3fff4ad4ca7fbea18f6c3673ed8ecee676256c4b32b6777c35bb1041e4535908",
+    "static-export-manifest.json": "9015a2901e1fae8bb1dded55b5780ec999e63c0c433deb2ec35421e356641b5d",
+    "static-publication-index.json": "eb863c5b2610a98a81e3d6606c4a30e1076f048666ae2de674ffe6d069e9191d",
+    "studio.html": "2721ac18443cfbf942a4e82a385ff1b455c22db2255f2f19a4d04b07a26bd74c",
     "surface-material-notices/fine-gallery-concrete-1.txt": "5953f6ffbb434db184d6e5af933a7600ce564b85df1173ed87ba041a9ced6288",
     "surface-material-notices/fine-lime-plaster-1.txt": "36d175c95c1d07e4d306c64f87468a7d63f2199edcc472ac2837deebc0414b33",
     "surface-material-notices/museum-matte-paint-1.txt": "dd2097de8126b398fe4e6fd7ab3c4fbb20b5347d92915b9a6c85bd1ab0050583",
@@ -175,12 +176,12 @@
   },
   "nativeClosure": {
     "url": "https://github.com/ExhibitOS/demo.git",
-    "commit": "4ec68f17811ff297b344be9c9f22278e2609ebcd",
-    "tree": "e0534b8c4799464ad2754419fe37b9e1117b5690",
-    "indexSha256": "171996d8e0872e63fc3766c611a6e8a2e64e58f8825c4285556d3ed7738d2fbc",
-    "inventorySha256": "1f363ed5fde5e2c2f27a838c3d150aa4f0af76b7d0bfd67946366c7860d62f0a",
-    "sourceManifestSha256": "80e743ad55d6672fbf3cd19fedc37cff0b43c0454f97f63c41a311bb04adcd55",
-    "inputId": "1f363ed5fde5e2c2f27a838c3d150aa4f0af76b7d0bfd67946366c7860d62f0a",
-    "fileCount": 188
+    "commit": "5497a21459a43289e0138b4b600d61da2144e6c9",
+    "tree": "9585ce05a2cf95962d6f79ff897ba834060f47c3",
+    "indexSha256": "eb863c5b2610a98a81e3d6606c4a30e1076f048666ae2de674ffe6d069e9191d",
+    "inventorySha256": "ebb6655728d3e67e79701835d3b25b4fad03a624a3e606659eb539511f92dd1a",
+    "sourceManifestSha256": "65d9fe7193408a5e48831c0cf6c6ee8b5595a824c8ed95eec3fdf95a7f851eed",
+    "inputId": "ebb6655728d3e67e79701835d3b25b4fad03a624a3e606659eb539511f92dd1a",
+    "fileCount": 189
   }
 }
