@@ -1,9 +1,10 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, renameSync, rmSync, readdirSync, lstatSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, renameSync, rmSync, readdirSync, lstatSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { digest, verifyOutput } from './verify-output.mjs';
 import { nativeInputDirectoryKey, verifyNativeInput } from './verify-native-input.mjs';
+import { verifyStaticInput } from './verify-static-input.mjs';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const lock = JSON.parse(readFileSync(join(root, 'demo-lock.json'), 'utf8'));
@@ -42,6 +43,28 @@ try {
     throw new Error('Platform source or dependency lock differs from demo-lock.json');
   }
 
+  if (lock.staticInput) {
+    const c = lock.staticInput;
+    if (lock.content || lock.nativeClosure || c.url !== 'https://github.com/ExhibitOS/demo.git' || !/^[a-f0-9]{40}$/.test(c.commit ?? '') || !/^[a-f0-9]{40}$/.test(c.tree ?? '') || !/^[a-f0-9]{64}$/.test(c.inputId ?? '') || c.inventorySha256 !== c.inputId) throw new Error('Invalid or ambiguous static input pin');
+    content = mkdtempSync(join(root, '.content-demo-'));
+    command('git', ['init', '--quiet'], content);
+    command('git', ['fetch', '--no-tags', '--depth=1', c.url, c.commit], content);
+    command('git', ['checkout', '--quiet', '--detach', 'FETCH_HEAD'], content);
+    if (command('git', ['rev-parse', 'HEAD'], content) !== c.commit || command('git', ['rev-parse', 'HEAD^{tree}'], content) !== c.tree) throw new Error('Static content commit/tree differs');
+    const parent = join(content, 'reference-static');
+    if (!lstatSync(parent).isDirectory() || lstatSync(parent).isSymbolicLink()) throw new Error('Invalid static content parent');
+    const dir = join(parent, c.inputId);
+    verifyStaticInput(dir, c, lock);
+    if (retainWrangler) {
+      execFileSync('npm', ['ci', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: source, stdio: 'inherit' });
+      const installed = JSON.parse(readFileSync(join(source, 'node_modules/wrangler/package.json'), 'utf8'));
+      if (installed.version !== lock.toolchain.wrangler) throw new Error('Wrangler version differs from demo-lock.json');
+      renameSync(source, tools);
+    }
+    cpSync(join(dir, 'output'), output, { recursive: true, errorOnExist: true, force: false });
+    const count = verifyOutput(output, lock);
+    console.log(`Verified ${count} files in ${output}`);
+  } else {
   const buildEnv = { ...process.env };
   delete buildEnv.EXHIBITOS_QUALIFIED_REFERENCE_SOURCE;
   delete buildEnv.EXHIBITOS_REFERENCE_NATIVE_CLOSURE;
@@ -96,6 +119,7 @@ try {
     renameSync(built, output);
   }
   console.log(`Verified ${count} files in ${output}`);
+  }
 } finally {
   rmSync(source, { recursive: true, force: true });
   if (content) rmSync(content, { recursive: true, force: true });
