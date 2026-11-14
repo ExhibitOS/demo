@@ -22,3 +22,5 @@ test('rejects changes, extra files, and links',t=>{const x=fixture(t),p=x.pin();
 test('rejects unsafe paths, wrong identity, duplicate and wrong count',t=>{const x=fixture(t);x.inv.files[0].path='output/../escape';assert.throws(()=>verifyStaticInput(x.dir,x.pin(),x.lock));x.inv.files[0].path='output/static-publication-index.json';x.inv.publication.revisionSha256='bad';assert.throws(()=>verifyStaticInput(x.dir,x.pin(),x.lock));x.inv.publication.revisionSha256=x.lock.publication.revisionSha256;x.inv.files[0]=x.inv.files[1];assert.throws(()=>verifyStaticInput(x.dir,x.pin(),x.lock));x.inv.files.pop();assert.throws(()=>verifyStaticInput(x.dir,x.pin(),x.lock));});
 
 test('154-entry output requires exact explicit count',t=>{const x=fixture(t,154),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),154);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:153},x.lock));});
+
+test('155-entry output requires exact explicit count',t=>{const x=fixture(t,155),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),155);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:154},x.lock));});
