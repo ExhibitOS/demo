@@ -15,7 +15,7 @@ function walk(dir, prefix = '') {
   });
 }
 export function verifyStaticInput(dir, pin, lock) {
-  if (!hex64.test(pin.inputId ?? '') || pin.inventorySha256 !== pin.inputId || ![153, 154, 155, 156, 157].includes(pin.fileCount)) throw new Error('Invalid static input pin');
+  if (!hex64.test(pin.inputId ?? '') || pin.inventorySha256 !== pin.inputId || ![153, 154, 155, 156, 157, 159].includes(pin.fileCount)) throw new Error('Invalid static input pin');
   if (!lstatSync(dir).isDirectory() || lstatSync(dir).isSymbolicLink()) throw new Error('Invalid static input root');
   if (JSON.stringify(readdirSync(dir).sort()) !== JSON.stringify(['integrity.json', 'output'])) throw new Error('Invalid static input root inventory');
   const inventory = join(dir, 'integrity.json');
