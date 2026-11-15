@@ -26,3 +26,5 @@ test('154-entry output requires exact explicit count',t=>{const x=fixture(t,154)
 test('155-entry output requires exact explicit count',t=>{const x=fixture(t,155),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),155);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:154},x.lock));});
 
 test('156-entry output requires exact explicit count',t=>{const x=fixture(t,156),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),156);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:155},x.lock));});
+
+test('157-entry output requires exact explicit count',t=>{const x=fixture(t,157),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),157);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:156},x.lock));});
