@@ -17,7 +17,7 @@
     "publicationId": "45f8735f-aaab-4c9e-a9aa-a9828bcc7e17",
     "revisionSha256": "2ac72776350701f79193886e6f4cde84f15e730ed9e1f4e25c812a2d8c153586",
     "indexSha256": "9aa5a8ffdf4b87cbb6454a4588fba7aecf79521fd4eaa41d1cdb8e5272fee0d2",
-    "manifestSha256": "035b184400c5a091e1914451d9ec135fc098b0d326b5abdbf4edd5b8250da671",
+    "manifestSha256": "b66507182214b5583e46e017c6a579af9e417b85464d497b9d3a8181e337704e",
     "priorCopyBaseCount": 0
   },
   "files": {
@@ -159,12 +159,12 @@
     "floor-textures/WoodFloor051/1/roughness-8c578dfb7c61.png": "8c578dfb7c616d81cf89a666506759f29cbd88ba15c6ea0221e52f9e9d57ae43",
     "furnish-catalog/backless-oak-bench/1/LICENSE-NOTICE.txt": "aea7aac82234e5f4158a901e84a753b79c75da20b72e859493801dffeaae3de5",
     "furnish-catalog/backless-oak-bench/1/model.glb": "364f12fc71c4572df5df5ea1b77b4b7c00d77d256459ec1c24657bb92a5c0e2b",
-    "index.html": "dcb693ea6a1d7773b8a6d452699dd0ad9d63df74d024cc1f79b2656fe4bc1fa3",
+    "index.html": "3d2beb40a3d97c150cb54d1ded8f5717bfdd22308f8a9158cccdfe9c05d7aafc",
     "material-catalogue-thumbnails/fine-gallery-concrete/1/preview-82b907f0df15.png": "82b907f0df15c881ce06d76c04f73f285edd555d23c56524f67242b754dacf8e",
     "material-catalogue-thumbnails/quiet-oak-herringbone/1/preview-4423a1fc11dc.png": "4423a1fc11dc52075ae1882d6971c656819630098696b77608b7309d0e53c9a9",
-    "static-export-manifest.json": "035b184400c5a091e1914451d9ec135fc098b0d326b5abdbf4edd5b8250da671",
+    "static-export-manifest.json": "b66507182214b5583e46e017c6a579af9e417b85464d497b9d3a8181e337704e",
     "static-publication-index.json": "9aa5a8ffdf4b87cbb6454a4588fba7aecf79521fd4eaa41d1cdb8e5272fee0d2",
-    "studio.html": "379c875c34b1aafc6af5984549d777a8d52edf5223d729ffbafefafa2d49ebd8",
+    "studio.html": "3d2beb40a3d97c150cb54d1ded8f5717bfdd22308f8a9158cccdfe9c05d7aafc",
     "surface-material-notices/fine-gallery-concrete-1.txt": "5953f6ffbb434db184d6e5af933a7600ce564b85df1173ed87ba041a9ced6288",
     "surface-material-notices/fine-lime-plaster-1.txt": "36d175c95c1d07e4d306c64f87468a7d63f2199edcc472ac2837deebc0414b33",
     "surface-material-notices/museum-matte-paint-1.txt": "dd2097de8126b398fe4e6fd7ab3c4fbb20b5347d92915b9a6c85bd1ab0050583",
@@ -183,11 +183,11 @@
   },
   "staticInput": {
     "url": "https://github.com/ExhibitOS/demo.git",
-    "inputId": "d227b7adf683c2398d0ef3a01355c31e68d823c99f687f6a58e2f04f4c973b2a",
-    "inventorySha256": "d227b7adf683c2398d0ef3a01355c31e68d823c99f687f6a58e2f04f4c973b2a",
+    "inputId": "ce442e19553472d8eae9a6b864279adacae4dd06e3e8caeb047268a1e1315b37",
+    "inventorySha256": "ce442e19553472d8eae9a6b864279adacae4dd06e3e8caeb047268a1e1315b37",
     "nativeManifestSha256": "66d85a919f04392bc739244246c1339e26d6059c5235dcd90a29db2384609363",
     "fileCount": 159,
-    "commit": "3009f5c98f218a160708cb381b6ee2432078ec06",
-    "tree": "fcf9845cd163b147f7b8b3e84c171bfb18052d71"
+    "commit": "2bb83b3a540802d41334233a4b9b51f48d22b1cd",
+    "tree": "807a1fb15db2e3ef848ca51e6dbb51703997e28e"
   }
 }
