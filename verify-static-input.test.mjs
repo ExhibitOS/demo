@@ -18,6 +18,21 @@ function fixture(t, count = 153) {
  return {dir,inv,pin,lock:{files,platform,publication:pub}};
 }
 test('accepts exact complete static output',t=>{const x=fixture(t);assert.equal(verifyStaticInput(x.dir,x.pin(),x.lock),153)});
+test('accepts a previously unlisted count only with the exact pinned output',t=>{
+ const x=fixture(t,166),p=x.pin();
+ assert.equal(verifyStaticInput(x.dir,p,x.lock),166);
+ for(const count of [0,-1,1.5,Number.MAX_SAFE_INTEGER+1,165,167]) assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:count},x.lock));
+ const h=x.lock.files.file0; delete x.lock.files.file0;
+ assert.throws(()=>verifyStaticInput(x.dir,p,x.lock)); x.lock.files.file0=h;
+ x.inv.files.pop(); const changed=x.pin(); assert.throws(()=>verifyStaticInput(x.dir,changed,x.lock));
+ assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));
+});
+test('previously unlisted output still rejects missing, extra, or changed files',t=>{
+ const x=fixture(t,166),p=x.pin(),file=join(x.dir,'output','file0');
+ rmSync(file); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));
+ writeFileSync(file,'test0'); writeFileSync(join(x.dir,'output','extra'),'x'); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));
+ rmSync(join(x.dir,'output','extra')); writeFileSync(file,'alter'); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));
+});
 test('145-entry output still requires the pinned bytes',t=>{const x=fixture(t,145),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),145);writeFileSync(join(x.dir,'output','file0'),'tampered');assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));});
 test('148-entry output requires the exact count and pinned bytes',t=>{const x=fixture(t,148),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),148);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:147},x.lock));writeFileSync(join(x.dir,'output','file0'),'tampered');assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));});
 test('149-entry output requires the exact count and pinned bytes',t=>{const x=fixture(t,149),p=x.pin();assert.equal(verifyStaticInput(x.dir,p,x.lock),149);assert.throws(()=>verifyStaticInput(x.dir,{...p,fileCount:148},x.lock));writeFileSync(join(x.dir,'output','file0'),'tampered');assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));});
