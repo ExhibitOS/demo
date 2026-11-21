@@ -1,0 +1,7 @@
+SecureSubset · Footsteps on Stone - Variations · Freesound #784301 · CC0 1.0 · ExhibitOS excerpt
+Source: https://freesound.org/people/SecureSubset/sounds/784301/
+CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+Original WAV SHA-256: b3a886118f3b10f5e15cf547da453251713f168cc058fe2b701ed053c8f9b578
+ExhibitOS excerpt: frames [96480,111360) at 48 kHz; stereo PCM24 to PCM16 by nearest quantization.
+Recording SHA-256: 9fb1851c98c8394c1639ace68e9a9091989cf3eac92ba2037b20798921e49226
+The approved asset permits display and export. Download and commercial use are disabled in the saved rights record.
