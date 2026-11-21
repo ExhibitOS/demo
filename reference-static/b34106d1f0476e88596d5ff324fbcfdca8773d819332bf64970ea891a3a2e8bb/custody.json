@@ -1,0 +1,9 @@
+{
+  "format": "exhibitos-derived-static-custody-v1",
+  "indexSha256": "3e084a9cececcf806e33b92b247fbb841476f2a8ec7bd85ca52df57112eeaaae",
+  "manifestSha256": "a9fa3d58a77c5e44a9a7a883a47fe1337f10d308b53c44cba16e02eeef9098dc",
+  "predecessorDeploymentReceiptSha256": "7c19e01fd855f463976729d4b37b9f3155015b15fb156777ee44a0f65014b369",
+  "predecessorNativeManifestSha256": "04a114d5e8de8f55b867e133903ed34617a5afef3460adf35239be3f0c65eab3",
+  "predecessorStaticManifestSha256": "549ecc5b2463189698b6e147825e839b58d70c7acdc60320c127b1747357d006",
+  "sourceCustodySha256": "61d888b37f164a87c62f88c0ad848af989c4ad6f7d390265ab7c91d985d70525"
+}
