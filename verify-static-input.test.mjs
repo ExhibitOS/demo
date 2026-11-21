@@ -18,6 +18,21 @@ function fixture(t, count = 153) {
  return {dir,inv,pin,lock:{files,platform,publication:pub}};
 }
 test('accepts exact complete static output',t=>{const x=fixture(t);assert.equal(verifyStaticInput(x.dir,x.pin(),x.lock),153)});
+test('derived input binds closed predecessor, custody and current output identities',t=>{
+ const x=fixture(t); delete x.inv.publication.nativeManifestSha256; x.inv.format='exhibitos-reference-static-input-derived-v2';
+ const c={format:'exhibitos-derived-static-custody-v1',predecessorNativeManifestSha256:'5'.repeat(64),predecessorStaticManifestSha256:'6'.repeat(64),predecessorDeploymentReceiptSha256:'7'.repeat(64),sourceCustodySha256:'8'.repeat(64),manifestSha256:x.lock.publication.manifestSha256,indexSha256:x.lock.publication.indexSha256};
+ const cb=Buffer.from(JSON.stringify(c)); writeFileSync(join(x.dir,'custody.json'),cb);
+ const provenance={predecessorNativeManifestSha256:c.predecessorNativeManifestSha256,predecessorStaticManifestSha256:c.predecessorStaticManifestSha256,predecessorDeploymentReceiptSha256:c.predecessorDeploymentReceiptSha256,sourceCustodySha256:c.sourceCustodySha256,custodyProjectionSha256:hash(cb)};
+ x.inv.provenance={...provenance}; const pin=()=>{const b=Buffer.from(JSON.stringify(x.inv));writeFileSync(join(x.dir,'integrity.json'),b);return {inputId:hash(b),inventorySha256:hash(b),fileCount:153,provenance:{...provenance}}};
+ let p=pin(); assert.equal(verifyStaticInput(x.dir,p,x.lock),153);
+ assert.throws(()=>verifyStaticInput(x.dir,{...p,nativeManifestSha256:'5'.repeat(64)},x.lock));
+ assert.throws(()=>verifyStaticInput(x.dir,{...p,provenance:{...p.provenance,predecessorStaticManifestSha256:'9'.repeat(64)}},x.lock));
+ writeFileSync(join(x.dir,'custody.json'),JSON.stringify({...c,sourceCustodySha256:'9'.repeat(64)})); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock)); writeFileSync(join(x.dir,'custody.json'),cb);
+ const bad=Buffer.from(JSON.stringify({...c,manifestSha256:'9'.repeat(64)})); writeFileSync(join(x.dir,'custody.json'),bad); provenance.custodyProjectionSha256=hash(bad); x.inv.provenance={...provenance}; p=pin(); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock)); writeFileSync(join(x.dir,'custody.json'),cb); provenance.custodyProjectionSha256=hash(cb); x.inv.provenance={...provenance};
+ x.inv.publication.nativeManifestSha256='5'.repeat(64); p=pin(); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock)); delete x.inv.publication.nativeManifestSha256;
+ p=pin(); writeFileSync(join(x.dir,'output','file0'),'stale'); assert.throws(()=>verifyStaticInput(x.dir,p,x.lock));
+});
+test('direct input rejects mixed derived pins and mismatched native provenance',t=>{const x=fixture(t),p=x.pin();assert.throws(()=>verifyStaticInput(x.dir,{...p,provenance:{}},x.lock));assert.throws(()=>verifyStaticInput(x.dir,{...p,nativeManifestSha256:'6'.repeat(64)},x.lock));});
 test('accepts a previously unlisted count only with the exact pinned output',t=>{
  const x=fixture(t,166),p=x.pin();
  assert.equal(verifyStaticInput(x.dir,p,x.lock),166);

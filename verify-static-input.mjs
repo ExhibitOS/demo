@@ -17,13 +17,26 @@ function walk(dir, prefix = '') {
 export function verifyStaticInput(dir, pin, lock) {
   if (!hex64.test(pin.inputId ?? '') || pin.inventorySha256 !== pin.inputId || !Number.isSafeInteger(pin.fileCount) || pin.fileCount <= 0 || pin.fileCount !== Object.keys(lock.files).length) throw new Error('Invalid static input pin');
   if (!lstatSync(dir).isDirectory() || lstatSync(dir).isSymbolicLink()) throw new Error('Invalid static input root');
-  if (JSON.stringify(readdirSync(dir).sort()) !== JSON.stringify(['integrity.json', 'output'])) throw new Error('Invalid static input root inventory');
+  const rootNames = readdirSync(dir).sort();
   const inventory = join(dir, 'integrity.json');
   if (!lstatSync(inventory).isFile() || lstatSync(inventory).isSymbolicLink() || digest(inventory) !== pin.inventorySha256) throw new Error('Static integrity digest differs');
   const inv = JSON.parse(readFileSync(inventory, 'utf8'));
-  if (!keys(inv, ['format', 'publication', 'viewer', 'files']) || inv.format !== 'exhibitos-reference-static-input-v1' || !keys(inv.publication, ['publicationId','revisionSha256','indexSha256','nativeManifestSha256','manifestSha256']) || !keys(inv.viewer, ['sourceCommit','sourceTree','lockSha256','buildId']) || !Array.isArray(inv.files) || inv.files.length !== pin.fileCount) throw new Error('Invalid static inventory schema');
+  const derived = inv.format === 'exhibitos-reference-static-input-derived-v2';
+  const direct = inv.format === 'exhibitos-reference-static-input-v1';
+  if (!keys(inv, derived ? ['format', 'publication', 'viewer', 'files', 'provenance'] : ['format', 'publication', 'viewer', 'files']) || (!derived && !direct) || !keys(inv.publication, derived ? ['publicationId','revisionSha256','indexSha256','manifestSha256'] : ['publicationId','revisionSha256','indexSha256','nativeManifestSha256','manifestSha256']) || !keys(inv.viewer, ['sourceCommit','sourceTree','lockSha256','buildId']) || !Array.isArray(inv.files) || inv.files.length !== pin.fileCount) throw new Error('Invalid static inventory schema');
+  if (JSON.stringify(rootNames) !== JSON.stringify(derived ? ['custody.json', 'integrity.json', 'output'] : ['integrity.json', 'output'])) throw new Error('Invalid static input root inventory');
   for (const k of ['publicationId','revisionSha256','indexSha256','manifestSha256']) if (inv.publication[k] !== lock.publication[k]) throw new Error(`Static publication ${k} differs`);
-  if (inv.publication.nativeManifestSha256 !== pin.nativeManifestSha256 || !hex64.test(pin.nativeManifestSha256 ?? '')) throw new Error('Static native manifest differs');
+  if (direct) {
+    if ('provenance' in pin || inv.publication.nativeManifestSha256 !== pin.nativeManifestSha256 || !hex64.test(pin.nativeManifestSha256 ?? '')) throw new Error('Static native manifest differs');
+  } else {
+    const fields = ['predecessorNativeManifestSha256','predecessorStaticManifestSha256','predecessorDeploymentReceiptSha256','sourceCustodySha256','custodyProjectionSha256'];
+    if ('nativeManifestSha256' in pin || !keys(inv.provenance, fields) || !keys(pin.provenance, fields) || fields.some(k => !hex64.test(inv.provenance[k] ?? '') || inv.provenance[k] !== pin.provenance[k])) throw new Error('Derived static provenance differs');
+    const path = join(dir, 'custody.json'), stat = lstatSync(path);
+    if (!stat.isFile() || stat.isSymbolicLink() || digest(path) !== pin.provenance.custodyProjectionSha256) throw new Error('Derived custody digest differs');
+    const c = JSON.parse(readFileSync(path, 'utf8'));
+    const cfields = ['format','predecessorNativeManifestSha256','predecessorStaticManifestSha256','predecessorDeploymentReceiptSha256','sourceCustodySha256','manifestSha256','indexSha256'];
+    if (!keys(c, cfields) || c.format !== 'exhibitos-derived-static-custody-v1' || fields.slice(0, 4).some(k => c[k] !== pin.provenance[k]) || c.manifestSha256 !== lock.publication.manifestSha256 || c.indexSha256 !== lock.publication.indexSha256) throw new Error('Derived custody identity differs');
+  }
   for (const [a,b] of [['sourceCommit','viewerSourceCommit'],['sourceTree','viewerSourceTree'],['lockSha256','lockSha256'],['buildId','buildId']]) if (inv.viewer[a] !== lock.platform[b]) throw new Error(`Static viewer ${a} differs`);
   const root = join(dir, 'output');
   if (!lstatSync(root).isDirectory() || lstatSync(root).isSymbolicLink()) throw new Error('Invalid static output root');
