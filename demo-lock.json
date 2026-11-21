@@ -17,22 +17,22 @@
     "publicationId": "63719dad-65d3-41e9-86a8-57304976e142",
     "revisionSha256": "71fdcb09d1153e9a7e36a06788070ca4e92ed5287ccddbd8198ef90e70af55cc",
     "indexSha256": "3e084a9cececcf806e33b92b247fbb841476f2a8ec7bd85ca52df57112eeaaae",
-    "manifestSha256": "549ecc5b2463189698b6e147825e839b58d70c7acdc60320c127b1747357d006",
+    "manifestSha256": "a9fa3d58a77c5e44a9a7a883a47fe1337f10d308b53c44cba16e02eeef9098dc",
     "priorCopyBaseCount": 0
   },
   "staticInput": {
     "url": "https://github.com/ExhibitOS/demo.git",
-    "inputId": "bf5817090726d8bb204fc89584556f7878a740e6bd5a71c89e913f5aaf18e5db",
-    "inventorySha256": "bf5817090726d8bb204fc89584556f7878a740e6bd5a71c89e913f5aaf18e5db",
-    "fileCount": 165,
-    "commit": "c5a8bb3dade3af0d98f4b8dacaeafceee7a13bff",
-    "tree": "ee5df4db6c1048cbde4b24336d86ccb5a692c6d0",
+    "inputId": "b34106d1f0476e88596d5ff324fbcfdca8773d819332bf64970ea891a3a2e8bb",
+    "inventorySha256": "b34106d1f0476e88596d5ff324fbcfdca8773d819332bf64970ea891a3a2e8bb",
+    "fileCount": 166,
+    "commit": "12dc9a18b976a00ba797aed26b3a1a8daeaef835",
+    "tree": "1c2612be0a767b364d626ef10c221801144011e0",
     "provenance": {
       "predecessorNativeManifestSha256": "04a114d5e8de8f55b867e133903ed34617a5afef3460adf35239be3f0c65eab3",
-      "predecessorStaticManifestSha256": "1b7ea50c1fcc3a9ec42ff35c80d8c4d7f2c6ca02b85064cef4712b9918727ca4",
-      "predecessorDeploymentReceiptSha256": "66446e52024adcabae4ee167fb1a4b7bc00bc08744d4f5673988df2d5845977d",
-      "sourceCustodySha256": "9b8a39f9ff5371c6720a1ac5f2af20357edfb0acedb90f5f06b633299e3b6f5b",
-      "custodyProjectionSha256": "05ef9183d0032cf6479bf297dbb4133cef1c07010ae749793993e7e4e64f89d4"
+      "predecessorStaticManifestSha256": "549ecc5b2463189698b6e147825e839b58d70c7acdc60320c127b1747357d006",
+      "predecessorDeploymentReceiptSha256": "7c19e01fd855f463976729d4b37b9f3155015b15fb156777ee44a0f65014b369",
+      "sourceCustodySha256": "61d888b37f164a87c62f88c0ad848af989c4ad6f7d390265ab7c91d985d70525",
+      "custodyProjectionSha256": "999bb6d29871be4a4e0bf5c50737000bdf8296c6b7df3513c0120f8f11bec8d3"
     }
   },
   "files": {
@@ -185,7 +185,7 @@
     "floor-textures/quiet-oak-herringbone/1/normal-21bddb22f10b.png": "21bddb22f10bb8ccb76d2ffd4fcb2ca5a5f5255b8e719c265bc0f0d0e08bb3c9",
     "floor-textures/quiet-oak-herringbone/1/roughness-f889803f9d84.png": "f889803f9d84abb882bbe2405603a5443389187a7152061f7c043631ce85b717",
     "index.html": "38401b0f29f6ddf4834696873bcf30f47f7a8edb590a726ba5db3b3a8ac14915",
-    "static-export-manifest.json": "549ecc5b2463189698b6e147825e839b58d70c7acdc60320c127b1747357d006",
+    "static-export-manifest.json": "a9fa3d58a77c5e44a9a7a883a47fe1337f10d308b53c44cba16e02eeef9098dc",
     "static-publication-index.json": "3e084a9cececcf806e33b92b247fbb841476f2a8ec7bd85ca52df57112eeaaae",
     "surface-material-notices/fine-gallery-concrete-1.txt": "5953f6ffbb434db184d6e5af933a7600ce564b85df1173ed87ba041a9ced6288",
     "surface-material-notices/fine-lime-plaster-1.txt": "36d175c95c1d07e4d306c64f87468a7d63f2199edcc472ac2837deebc0414b33",
@@ -200,6 +200,7 @@
     "surface-material-textures/museum-matte-paint/1/normal-10246edc0ab3.png": "10246edc0ab388181a9b1d4fed8dd486a01b0f618f8b1a7a5919e3b5b160e324",
     "surface-material-textures/museum-matte-paint/1/roughness-b62c048f8819.png": "b62c048f881954fda611a1c415433460fd655a8ef14a1368b31b13918cad4cd8",
     "viewer-favicon.svg": "c2d259310843e6c9f676ef8e3ecde72edf5305a94fb87afcea44b4657d558263",
-    "voice-pcm-worklet.js": "5102845526a4cd0bf2dfef4e66650c5e11b334c13c3915c3961cd1257793cae2"
+    "voice-pcm-worklet.js": "5102845526a4cd0bf2dfef4e66650c5e11b334c13c3915c3961cd1257793cae2",
+    "studio.html": "38401b0f29f6ddf4834696873bcf30f47f7a8edb590a726ba5db3b3a8ac14915"
   }
 }
