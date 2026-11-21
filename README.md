@@ -8,6 +8,8 @@ The lock records the source and toolchain, publication revision, public index an
 
 Static inputs produced directly from a Native export retain the v1 Native manifest pin. A Server-derived successor uses the closed derived-v2 variant: it identifies the predecessor Native manifest, predecessor public static manifest and deployment receipt, the reviewed source custody digest, and a hash-pinned public custody projection. The projection binds those identities to the current output manifest and index; it records provenance and does not itself authenticate the source or replace independent custody and rights review. Derived pins cannot be mixed with the v1 Native manifest field.
 
+For a reviewed, immutable Server-derived input, Delivery may stage output with `python3 prepare-release-output.py --repo <absolute-owned-demo-worktree> --source <absolute-reviewed-output> --input-id <integrity-sha256>` after writing the matching `reference-static/<input-id>/integrity.json` and custody projection. The command verifies the complete inventory, rejects unrelated worktree changes, links and unexpected files, and creates only a new owner-writable output copy; it does not change the source. Retain the existing exclusive custody, review and release checks. Normal worktree cleanup still requires confirming ownership, no active consumers, no unique changes and durable remote/rollback evidence before `git worktree remove`.
+
 Platform source is available at [ExhibitOS/platform](https://github.com/ExhibitOS/platform) under AGPL-3.0-or-later. The build carries through the pinned publication rights records and generated third-party notices. Those records govern the individual assets.
 
 ## Cloudflare non-production preview
