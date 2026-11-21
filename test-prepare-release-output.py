@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('release_copy', pathlib.Path(__file__).with_name('prepare-release-output.py'))
 module = importlib.util.module_from_spec(spec)
@@ -83,6 +84,26 @@ class ReleaseCopyTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Unsafe or unexpected'):
             module.copy_output(self.repo, self.source, self.ident)
         self.assertFalse((self.parent / 'output').exists())
+
+    def test_source_swap_before_copy_is_refused(self):
+        target = self.source / 'data' / 'fixture.bin'
+        original_open = module.open_regular
+        count = 0
+
+        def swap_on_copy(path):
+            nonlocal count
+            if path == target:
+                count += 1
+                if count == 2:
+                    target.unlink()
+                    target.symlink_to(self.src_root / 'elsewhere')
+            return original_open(path)
+
+        with patch.object(module, 'open_regular', side_effect=swap_on_copy):
+            with self.assertRaises(OSError):
+                module.copy_output(self.repo, self.source, self.ident)
+        self.assertEqual(count, 2)
+        self.assertTrue((self.parent / 'output').exists())
 
     def test_existing_destination_and_source_mismatch_refused(self):
         (self.parent / 'output').mkdir()

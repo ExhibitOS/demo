@@ -5,7 +5,6 @@ import hashlib
 import json
 import os
 import re
-import shutil
 import stat
 import subprocess
 from pathlib import Path
@@ -22,6 +21,15 @@ def checked_dir(path, base):
     info = path.lstat()
     if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid():
         raise ValueError('Directory must be owned by the current user')
+
+
+def open_regular(path):
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    info = os.fstat(fd)
+    if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid():
+        os.close(fd)
+        raise ValueError('Unsafe regular file')
+    return os.fdopen(fd, 'rb')
 
 
 def digest(path):
@@ -43,7 +51,9 @@ def copy_output(repo, source, input_id):
     parent = repo / 'reference-static' / input_id
     checked_dir(parent, repo / 'reference-static')
     inventory = parent / 'integrity.json'
-    if inventory.is_symlink() or not inventory.is_file() or digest(inventory) != input_id:
+    with open_regular(inventory) as f:
+        inventory_bytes = f.read(4 * 1024 * 1024 + 1)
+    if len(inventory_bytes) > 4 * 1024 * 1024 or hashlib.sha256(inventory_bytes).hexdigest() != input_id:
         raise ValueError('Inventory hash does not match input ID')
     dest = parent / 'output'
     if dest.exists() or dest.is_symlink():
@@ -52,7 +62,7 @@ def copy_output(repo, source, input_id):
     allowed = {f'?? reference-static/{input_id}/integrity.json', f'?? reference-static/{input_id}/custody.json'}
     if any(line not in allowed for line in status.splitlines()):
         raise ValueError('Worktree has unrelated changes')
-    inv = json.loads(inventory.read_text())
+    inv = json.loads(inventory_bytes)
     entries = inv.get('files')
     if not isinstance(entries, list) or not entries:
         raise ValueError('Missing file inventory')
@@ -78,7 +88,9 @@ def copy_output(repo, source, input_id):
             key = f.relative_to(source).as_posix()
             if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid() or key not in expected:
                 raise ValueError('Unsafe or unexpected source file')
-            if info.st_size != expected[key]['bytes'] or digest(f) != expected[key]['sha256']:
+            with open_regular(f) as verified:
+                checked = verified.read(expected[key]['bytes'] + 1)
+            if len(checked) != expected[key]['bytes'] or hashlib.sha256(checked).hexdigest() != expected[key]['sha256']:
                 raise ValueError('Source file differs from inventory')
             found.add(key)
     if found != set(expected):
@@ -88,9 +100,15 @@ def copy_output(repo, source, input_id):
         src, dst = source / name, dest / name
         dst.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         # copyfile does not preserve the producer's read-only directory modes.
-        with src.open('rb') as inp, dst.open('xb') as out:
-            shutil.copyfileobj(inp, out)
-        os.chmod(dst, 0o755 if src.stat().st_mode & 0o111 else 0o644)
+        with open_regular(src) as inp, dst.open('xb') as out:
+            info = os.fstat(inp.fileno())
+            if info.st_size != e['bytes']:
+                raise ValueError('Source size changed; preserve partial destination')
+            data = inp.read(e['bytes'] + 1)
+            if len(data) != e['bytes'] or hashlib.sha256(data).hexdigest() != e['sha256']:
+                raise ValueError('Source changed; preserve partial destination')
+            out.write(data)
+        os.chmod(dst, 0o755 if info.st_mode & 0o111 else 0o644)
         if dst.stat().st_size != e['bytes'] or digest(dst) != e['sha256']:
             raise ValueError('Copied file differs from inventory; preserve partial destination')
     print(f'Copied and verified {len(expected)} files into {dest}')
