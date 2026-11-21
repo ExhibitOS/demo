@@ -6,6 +6,8 @@ Use Node 24.21.0, npm 11.19.0 and Git. Run `node build.mjs` from a fresh checkou
 
 The lock records the source and toolchain, publication revision, public index and manifest, and all approved output digests. A content or shared dependency update requires an explicit lock update and verification. Deployment configuration is managed separately.
 
+Static inputs produced directly from a Native export retain the v1 Native manifest pin. A Server-derived successor uses the closed derived-v2 variant: it identifies the predecessor Native manifest, predecessor public static manifest and deployment receipt, the reviewed source custody digest, and a hash-pinned public custody projection. The projection binds those identities to the current output manifest and index; it records provenance and does not itself authenticate the source or replace independent custody and rights review. Derived pins cannot be mixed with the v1 Native manifest field.
+
 Platform source is available at [ExhibitOS/platform](https://github.com/ExhibitOS/platform) under AGPL-3.0-or-later. The build carries through the pinned publication rights records and generated third-party notices. Those records govern the individual assets.
 
 ## Cloudflare non-production preview
